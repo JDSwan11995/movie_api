@@ -1,7 +1,9 @@
 const express = require('express'),
     morgan = require('morgan'),
     fs = require('fs'),
-    path = require('path');
+    path = require('path'),
+    bodyParser = require('body-parser');
+    //methodOverride = require('method-overide');
 
 const app = express();
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'})
@@ -18,6 +20,20 @@ app.get('/secreturl', (req, res) => {
 
 app.get('/arbitrary', (req, res) => {
     res.send('This is a test page');
+});
+
+app.use(express.static('public'));
+
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
+app.use(bodyParser.json());
+//app.use(methodOverride());
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send("Oops, something broke! No worries, our team of highly trained orangutans are on the job!");
 });
 
 app.listen(8080, () => {
