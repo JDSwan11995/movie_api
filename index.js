@@ -22,6 +22,10 @@ app.get('/arbitrary', (req, res) => {
     res.send('This is a test page');
 });
 
+app.get('/movies', (req, res) => {
+    res.json([{title: 'Movie1'}, {title: 'Movie2'}])
+});
+
 app.use(express.static('public'));
 
 app.use(bodyParser.urlencoded({
