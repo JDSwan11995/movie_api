@@ -115,3 +115,4 @@ URL: /favicon.ico/nTimestamp: Sat Oct 19 2024 19:18:04 GMT-0500 (Central Dayligh
 ::ffff:127.0.0.1 - - [12/Dec/2024:03:17:34 +0000] "GET / HTTP/1.1" 200 18 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0"
 ::ffff:127.0.0.1 - - [12/Dec/2024:03:17:34 +0000] "GET /favicon.ico HTTP/1.1" - - "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0"
 ::ffff:127.0.0.1 - - [12/Dec/2024:03:17:42 +0000] "GET /documentation HTTP/1.1" 404 152 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:133.0) Gecko/20100101 Firefox/133.0"
+::1 - - [12/Dec/2024:03:23:42 +0000] "GET /movies HTTP/1.1" 200 1621 "-" "PostmanRuntime/7.43.0"
