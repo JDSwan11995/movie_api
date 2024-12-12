@@ -4,18 +4,108 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device=width, initial-scale=1">
-    <title>Documentation</title>
+    <title>Documentation for my Movie API</title>
+    <style>
+        table {
+            width: 100%;
+            margin: 15px;
+        }
+        table, th, td {
+            border: 1px;
+            text-align: left;
+            word-wrap: break-word;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Documentation Page</h1>
-    <p>
-        Lorem ipsum odor amet, consectetuer adipiscing elit. Praesent ornare urna eu ridiculus dictumst! Aliquam
-        torquent lobortis risus neque malesuada. Accumsan maximus natoque justo augue consequat quam arcu egestas.
-        Curabitur elementum tellus mollis lacinia mauris mi? Mus molestie conubia condimentum rutrum tincidunt
-        parturient? Eget id neque nulla iaculis massa aliquet cubilia. Etiam cursus morbi suscipit porttitor in ad
-        venenatis aliquam quisque.
-    </p>
+    <p>This application is intended to allow users to find information about several Studio Ghibli movies. Users should be able to sign up and alter profiles including a list of favorite movies.</p>
+    <br>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Request</th>
+                    <th>URL</th>
+                    <th>HTTP Method Type</th>
+                    <th>Request Body Format</th>
+                    <th>Response Body Format</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Return a list of all included movies</td>
+                    <td>/movies</td>
+                    <td>This is a GET Request</td>
+                    <td>No Request Body</td>
+                    <td>"/movies" will retrun a JSON array of all included movies.</td>
+                </tr>
+                <tr>
+                    <td>Return a specific movie by title.</td>
+                    <td>/movies/:title</td>
+                    <td>This is also a GET Request</td>
+                    <td>No Request Body</td>
+                    <td>/movies/:title will return a JSON object with the details of the specific movie.</td>
+                </tr>
+                <tr>
+                    <td>Return details about a specific included genre</td>
+                    <td>/movies/genres/:genreName</td>
+                    <td>This is also a GET Request</td>                    
+                    <td>No Request Body</td>
+                    <td>/movies/genres/:genreName will return a JSON object with details about the specific genre.</td>
+                </tr>
+                <tr>
+                    <td>Return details about a director</td>
+                    <td>/movies/directors/:directorName</td>
+                    <td>This is also a GET Request</td>
+                    <td>No Request Body</td>
+                    <td>/movies/directors/:director will retrun a JSON object about the specified director.</td>
+                </tr>                
+                <tr>
+                    <td>Create a new user</td>
+                    <td>/users</td>
+                    <td>This is a POST Request</td>
+                    <td>The expected Request Body should be a JSON object structured like this. 
+                        <pre>{ name: 'Albert Newman', favoriteMovies: [],} </pre>
+                    </td>
+                    <td>If the name field is filled and the favoriteMovies field contains a movie on the list then a new user is created.</td>                
+                </tr>
+                <tr>
+                    <td>Update User by ID</td>
+                    <td>/user/:id</td>
+                    <td>This is a PUT Request</td>
+                    <td>The expected Request Body should be a JSON object structured like this. 
+                        <pre>{ name: 'Alice Newman', favoriteMovies:[],}</pre>
+                    </td>
+                    <td>If the ID number is in the system and the fields are filled out correctly a message will be sent showing the updated data.</td>
+                </tr>
+                <tr>
+                    <td>Add a movie to the Favorites list</td>
+                    <td>/users/:id/:movieTitle</td>                    
+                    <td>This is also a POST Request</td>
+                    <td>The expected Request Body should be a JSON object structured like this.
+                        <pre> { title: [] }</pre>
+                    </td>
+                    <td>If the User ID and the movie title exist, the user will recieve a message letting them know it has been added to their favorites list.</td>
+                </tr>
+                <tr>
+                    <td>Remove a movie from the favorites list</td>
+                    <td>/users/:id/:movieTitle</td>
+                    <td>This is a DELETE Request</td>
+                    <td>No Request Body</td>
+                    <td>If the User ID and the movie title exist, the user will recieve a message letting them know it has been removed from their favorites list.</td>                
+                </tr>
+                <tr>
+                    <td>Delete User</td>
+                    <td>/users/:id</td>
+                    <td>This is also a DELETE Request</td>
+                    <td>No Request Body</td>
+                    <td>If the user exists, they are removed and sent a message confirming the removal.</td>                
+                </tr> 
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
