@@ -47,7 +47,7 @@ let ghibliMovies = [
         'Description': 'Young sisters, Satsuki and Mei, move to the countryside with their father to be near their ailing mother, they soon meet the friendly and curious spirits of the forest.',
         'Genre': {
             'Name': 'Fantasy',
-            'Description': 'In film, the fantasy genre transports audiences to worlds where magic, mythical creatures and epic adventures intertwine with universal themes of heroism, discovery, and wonder.'
+            'Description': 'The fantasy genre features imaginative and often magical worlds, characters, and events'
         },
         'Year': '1988', 
         'Director': {
@@ -59,10 +59,10 @@ let ghibliMovies = [
     },
     {
         'Title': 'Grave of the Fireflies', 
-        'Description':'',
+        'Description':'A poignant animated film about two siblings struggling to survive in wartime Japan.',
         'Genre': {
-            'Name': '',
-            },
+            'Name': 'Period Drama',
+            'Description': 'The period drama transports audiences to the past, immersing them in insights and offering insight into the lives of characters from different time periods.'},
         'Year': '1988', 
         'Director': {
             'Name': 'Isao Takahata',
@@ -74,51 +74,54 @@ let ghibliMovies = [
     },
     {
         'Title': 'Ocean Waves', 
-        'Description':'',
+        'Description':'A reflective coming-of-age story about friendship, love, and the complexities of adolecent emotions in a small coastal town.',
         'Genre': {
-            'Name': 'Fantasy',
-            },
+            'Name': 'Romance',
+            'Description': 'The romance genre features the theme of romantic relationships and emotional connections between characters.'},
         'Year': '1993', 
         'Director': {
             'Name': 'Tomomi Mochizuki',
             'Bio': '',
-            'Birth': 'Defcember 31, 1958',
+            'Birth': 'December 31, 1958',
         },
         'RottenTomatoesRating': '89%'
     },
     {
         'Title': 'Spirited Away', 
-        'Description':'',
+        'Description':'A mesmerizing tale of a young girl who finds herself in a mysterious world of spirits and must navigate its wonders and challenges to find her way home.',
         'Genre': {
-            'Name': '',
+            'Name': 'Fairy Tale',
+            'Description': 'The fairy tale subgenre features narratives featuring magical and fantastical elements, often focusing on themes of morality, wonder, and the triumph of good over evil.'
             },
         'Year':'2001', 
         'Director': {
             'Name': 'Hayao Miyazaki',
-            'Bio': '',
+            'Bio': 'A legendary Japanese animator, director, and co-founder of Studio Ghibli, known for creating imaginative and heartfelt films.',
             'Birth': 'January 5, 1941',
         }, 
         'RottenTomatoesRating': '96%'
     },
     {
         'Title': 'Tales from Earthsea', 
-        'Description':'',
+        'Description':'Based on the tales from Ursala K LeGuin, Tales from Earthsea is a mystical journey through a world of dragons and wizards, where a young prince and a wandering mage must confront a looming imbalance threatening their land.',
         'Genre': {
-            'Name': '',
+            'Name': 'Adventure',
+            'Description': 'The adventure genre features exciting journeys, quests, or expeditions undertaken by characters who often face challenges, obstacles, and risks in pursuit of a goal.'
             },
         'Year': '2006', 
         'Director': {
             'Name': 'Goro Miyazaki',
-            'Bio': '',
+            'Bio': 'A director who has carved his own path in storytelling, blending imaginative worlds with thoughtful character development while carrying forward a legacy of artistic creativity.',
             'Birth': 'January 21, 1967',
         },
         'RottenTomatoesRating': '38%'
     },
     {
         'Title': 'Arrietty', 
-        'Description':'',
+        'Description':'Based on The Borrowers by Mary Norton, Arrietty is a gentle story apout a tiny, resourceful girl from a family of "borrowers" who forges an unlikely friendship with a human boy, changing both of their worlds.',
         'Genre': {
-            'Name': '',
+            'Name': 'Family',
+            'Description': 'The family genre features stories specifically created to be suitable for a wide range of age groups within a family.'
             },
         'Year': '2010', 
         'Director': {
@@ -130,9 +133,10 @@ let ghibliMovies = [
     },
     {
         'Title': 'The Red Turtle', 
-        'Description':'',
+        'Description':'Based on The Borrowers by Mary Norton, Arrietty is a gentle story apout a tiny, resourceful girl from a family of "borrowers" who forges an unlikely friendship with a human boy, changing both of their worlds.',
         'Genre': {
-            'Name': '',
+            'Name': 'Drama',
+            'Description': 'The drama genre is a broad category that features stories portraying human experiences, emotions, conflicts, and relationships in a realistic and emotionally impactful way.'
             },
         'Year': '2016', 
         'Director': {
