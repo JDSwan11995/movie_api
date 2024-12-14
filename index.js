@@ -26,28 +26,33 @@ app.get('/arbitrary', (req, res) => {
 let users = [
     {
         id: 1,
-        name: "Kim",
-        favoriteMovies:[],
+        name: "Esmerelda Weatherwax",
+        favoriteMovies:["Grave of the Fireflies"],
     },
     {
         id: 2,
-        name: "Jess",
-        favoriteMovies:["My Neighbor Totoro"],
+        name: "Gytha Ogg",
+        favoriteMovies:["My Neighbor Totoro",],
     },
+    {
+        id: 3,
+        name: "Magrat Garlick",
+        favoriteMovies: ["Spirited Away",],
+    }
 ]
 
 let ghibliMovies = [
     {
         'Title': 'My Neighbor Totoro', 
         'Description': 'Young sisters, Satsuki and Mei, move to the countryside with their father to be near their ailing mother, they soon meet the friendly and curious spirits of the forest.',
-        'Genres': {
+        'Genre': {
             'Name': 'Fantasy',
             'Description': 'In film, the fantasy genre transports audiences to worlds where magic, mythical creatures and epic adventures intertwine with universal themes of heroism, discovery, and wonder.'
         },
         'Year': '1988', 
         'Director': {
             'Name': 'Hayao Miyazaki',
-            'Bio': '',
+            'Bio': 'A legendary Japanese animator, director, and co-founder of Studio Ghibli, known for creating imaginative and heartfelt films.',
             'Birth': 'January 5, 1941',
         }, 
         'RottenTomatoesRating': '94%'
@@ -55,10 +60,9 @@ let ghibliMovies = [
     {
         'Title': 'Grave of the Fireflies', 
         'Description':'',
-        'Genres': {
+        'Genre': {
             'Name': '',
-            'Description': '',
-        },
+            },
         'Year': '1988', 
         'Director': {
             'Name': 'Isao Takahata',
@@ -71,10 +75,9 @@ let ghibliMovies = [
     {
         'Title': 'Ocean Waves', 
         'Description':'',
-        'Genres': {
+        'Genre': {
             'Name': 'Fantasy',
-            'Description': '',
-        },
+            },
         'Year': '1993', 
         'Director': {
             'Name': 'Tomomi Mochizuki',
@@ -86,10 +89,9 @@ let ghibliMovies = [
     {
         'Title': 'Spirited Away', 
         'Description':'',
-        'Genres': {
+        'Genre': {
             'Name': '',
-            'Description': '',
-        },
+            },
         'Year':'2001', 
         'Director': {
             'Name': 'Hayao Miyazaki',
@@ -101,10 +103,9 @@ let ghibliMovies = [
     {
         'Title': 'Tales from Earthsea', 
         'Description':'',
-        'Genres': {
+        'Genre': {
             'Name': '',
-            'Description': '',
-        },
+            },
         'Year': '2006', 
         'Director': {
             'Name': 'Goro Miyazaki',
@@ -116,10 +117,9 @@ let ghibliMovies = [
     {
         'Title': 'Arrietty', 
         'Description':'',
-        'Genres': {
+        'Genre': {
             'Name': '',
-            'Description': '',
-        },
+            },
         'Year': '2010', 
         'Director': {
             'Name': 'Hiromasa Yonebayashi',
@@ -131,10 +131,9 @@ let ghibliMovies = [
     {
         'Title': 'The Red Turtle', 
         'Description':'',
-        'Genres': {
+        'Genre': {
             'Name': '',
-            'Description': '',
-        },
+            },
         'Year': '2016', 
         'Director': {
             'Name': 'Michaël Dudok de Wit',
