@@ -155,3 +155,8 @@ URL: /favicon.ico/nTimestamp: Sat Oct 19 2024 19:18:04 GMT-0500 (Central Dayligh
 ::1 - - [12/Dec/2024:23:58:15 +0000] "DELETE /users/1/Grave%20of%20the%20Fireflies HTTP/1.1" 200 83 "-" "PostmanRuntime/7.43.0"
 ::1 - - [12/Dec/2024:23:58:38 +0000] "DELETE /users/1/Grave%20of%20the%20Fireflies HTTP/1.1" 200 83 "-" "PostmanRuntime/7.43.0"
 ::1 - - [14/Dec/2024:00:04:59 +0000] "DELETE /users/1 HTTP/1.1" 200 37 "-" "PostmanRuntime/7.43.0"
+::1 - - [14/Dec/2024:00:30:11 +0000] "DELETE /users/1/Grave%20of%20the%20Fireflies HTTP/1.1" 200 88 "-" "PostmanRuntime/7.43.0"
+::1 - - [14/Dec/2024:00:30:41 +0000] "PUT /users/1/Grave%20of%20the%20Fireflies HTTP/1.1" 404 175 "-" "PostmanRuntime/7.43.0"
+::1 - - [14/Dec/2024:00:30:45 +0000] "POST /users/1/Grave%20of%20the%20Fireflies HTTP/1.1" 200 84 "-" "PostmanRuntime/7.43.0"
+::1 - - [14/Dec/2024:00:30:53 +0000] "POST /users/2/Grave%20of%20the%20Fireflies HTTP/1.1" 200 73 "-" "PostmanRuntime/7.43.0"
+::1 - - [14/Dec/2024:00:31:00 +0000] "DELETE /users/2/Grave%20of%20the%20Fireflies HTTP/1.1" 200 77 "-" "PostmanRuntime/7.43.0"
