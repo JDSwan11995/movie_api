@@ -43,13 +43,14 @@ let users = [
 
 let ghibliMovies = [
     {
+        'ID': '1',
         'Title': 'My Neighbor Totoro', 
         'Description': 'Young sisters, Satsuki and Mei, move to the countryside with their father to be near their ailing mother, they soon meet the friendly and curious spirits of the forest.',
         'Genre': {
             'Name': 'Fantasy',
             'Description': 'The fantasy genre features imaginative and often magical worlds, characters, and events'
         },
-        'Year': '1988', 
+        'Release Date': 'April 16,1988', 
         'Director': {
             'Name': 'Hayao Miyazaki',
             'Bio': 'A legendary Japanese animator, director, and co-founder of Studio Ghibli, known for creating imaginative and heartfelt films.',
@@ -58,12 +59,13 @@ let ghibliMovies = [
         'RottenTomatoesRating': '94%'
     },
     {
+        'ID': '2',
         'Title': 'Grave of the Fireflies', 
         'Description':'A poignant animated film about two siblings struggling to survive in wartime Japan.',
         'Genre': {
             'Name': 'Period Drama',
             'Description': 'The period drama transports audiences to the past, immersing them in insights and offering insight into the lives of characters from different time periods.'},
-        'Year': '1988', 
+        'ReleaseDate': 'April 16, 1988', 
         'Director': {
             'Name': 'Isao Takahata',
             'Bio': '',
@@ -73,12 +75,13 @@ let ghibliMovies = [
         'RottenTomatoesRating': '100%'
     },
     {
+        'ID':'3',
         'Title': 'Ocean Waves', 
         'Description':'A reflective coming-of-age story about friendship, love, and the complexities of adolecent emotions in a small coastal town.',
         'Genre': {
             'Name': 'Romance',
             'Description': 'The romance genre features the theme of romantic relationships and emotional connections between characters.'},
-        'Year': '1993', 
+        'ReleaseDate': 'May 5, 1993', 
         'Director': {
             'Name': 'Tomomi Mochizuki',
             'Bio': '',
@@ -87,13 +90,14 @@ let ghibliMovies = [
         'RottenTomatoesRating': '89%'
     },
     {
+        'ID':'4',
         'Title': 'Spirited Away', 
         'Description':'A mesmerizing tale of a young girl who finds herself in a mysterious world of spirits and must navigate its wonders and challenges to find her way home.',
         'Genre': {
             'Name': 'Fairy Tale',
             'Description': 'The fairy tale subgenre features narratives featuring magical and fantastical elements, often focusing on themes of morality, wonder, and the triumph of good over evil.'
             },
-        'Year':'2001', 
+        'ReleaseDate':'July 20, 2001', 
         'Director': {
             'Name': 'Hayao Miyazaki',
             'Bio': 'A legendary Japanese animator, director, and co-founder of Studio Ghibli, known for creating imaginative and heartfelt films.',
@@ -102,13 +106,14 @@ let ghibliMovies = [
         'RottenTomatoesRating': '96%'
     },
     {
+        'ID':'5',
         'Title': 'Tales from Earthsea', 
         'Description':'Based on the tales from Ursala K LeGuin, Tales from Earthsea is a mystical journey through a world of dragons and wizards, where a young prince and a wandering mage must confront a looming imbalance threatening their land.',
         'Genre': {
             'Name': 'Adventure',
             'Description': 'The adventure genre features exciting journeys, quests, or expeditions undertaken by characters who often face challenges, obstacles, and risks in pursuit of a goal.'
             },
-        'Year': '2006', 
+        'ReleaseDate': 'July 29, 2006', 
         'Director': {
             'Name': 'Goro Miyazaki',
             'Bio': 'A director who has carved his own path in storytelling, blending imaginative worlds with thoughtful character development while carrying forward a legacy of artistic creativity.',
@@ -117,13 +122,14 @@ let ghibliMovies = [
         'RottenTomatoesRating': '38%'
     },
     {
+        'ID':'6',
         'Title': 'Arrietty', 
         'Description':'Based on The Borrowers by Mary Norton, Arrietty is a gentle story apout a tiny, resourceful girl from a family of "borrowers" who forges an unlikely friendship with a human boy, changing both of their worlds.',
         'Genre': {
             'Name': 'Family',
             'Description': 'The family genre features stories specifically created to be suitable for a wide range of age groups within a family.'
             },
-        'Year': '2010', 
+        'ReleaseDate': 'July 17, 2010', 
         'Director': {
             'Name': 'Hiromasa Yonebayashi',
             'Bio': '',
@@ -132,19 +138,69 @@ let ghibliMovies = [
         'RottenTomatoesRating': '94%'
     },
     {
+        'ID':'7',
         'Title': 'The Red Turtle', 
         'Description':'Based on The Borrowers by Mary Norton, Arrietty is a gentle story apout a tiny, resourceful girl from a family of "borrowers" who forges an unlikely friendship with a human boy, changing both of their worlds.',
         'Genre': {
             'Name': 'Drama',
             'Description': 'The drama genre is a broad category that features stories portraying human experiences, emotions, conflicts, and relationships in a realistic and emotionally impactful way.'
             },
-        'Year': '2016', 
+        'ReleaseDate': 'May 18, 2016', 
         'Director': {
             'Name': 'Michaël Dudok de Wit',
-            'Bio': '',
+            'Bio': 'An animator, director, and artist celebrated for his distinctive, emotionally resonant animation style that blends simplicity with profound storytelling.',
             'Birth': 'July 15, 1953',
         }, 
         'RottenTomatoesRating': '93%'
+    },
+    {
+        'ID':'8',
+        'Title': 'The Cat Returns',
+        'Description': 'A whimsical tale about a girl who finds herself drawn into a fantastical world where she must navigate twists to rediscover her true self.',
+        'Genre': {
+            'Name': 'Fairy Tale',
+            'Description': 'The fairy tale subgenre features narratives featuring magical and fantastical elements, often focusing on themes of morality, wonder, and the triumph of good over evil.'
+            },
+        'ReleaseDate': 'July 20, 2002', 
+        'Director': {
+            'Name':'Hiroyuki Morita',
+            'Bio':'An animator and director known for his meticulous craftsmanship ans ability to infuse hearfelt emotion into his storytelling.',
+            'Birth': 'June 26, 1964'
+        },
+        'RottenTomatoesRating': '88%'
+    },
+    {
+        'ID':'9',
+        'Title': "Howl's Moving Castle",
+        'Description':"Based on the story by Diana Wynne Jones, Howl's Moving Castle is a magical tale of self-discovery and resilience, set in a world of shifting landscapes, mysterious magic users, and unexpected transformations.",
+        'Genre': {
+            'Name':'Adventure',
+            'Description':'The adventure genre features exciting journeys, quests, or expeditions undertaken by characters who often face challenges, obstacles, and risks in pursuit of a goal.',
+        },
+        'ReleaseDate': 'September 5, 2004', 
+        'Director':{
+            'Name': 'Hayao Miyazaki',
+            'Bio': 'A legendary Japanese animator, director, and co-founder of Studio Ghibli, known for creating imaginative and heartfelt films.',
+            'Birth': 'January 5, 1941',
+        },
+        'RottenTomatoesRating': '88%'
+    },
+    {
+        'ID':'10',
+        'Title': 'Whisper of the Heart',
+        'Description': 'A heartfelt coming-of-age story about a young girl discovering her creativity and the courage to pursue her dreams.',
+        'Genre': {
+            'Name': 'Coming-of-Age',
+            'Description': 'The coming-of-age subgenre features personal growth, maturation, and self-discovery of a young protagonist as they navigate the challenges and transitions of adolescence into adulthood'
+        },
+        'ReleaseDate': 'July 15, 1995', 
+        'Director': {
+            'Name': 'Yoshifumi Kondō',
+            'Bio': 'A talented animator and director celebrated for his exceptional attention to detail and his vital contributions to the art of animation.',
+            'Birth': 'March 31, 1950',
+            'Death': 'January 21, 1998',
+        },
+        'RottenTomatoesRating': '95%'
     },
 ]
 
