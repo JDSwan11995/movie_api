@@ -8,17 +8,18 @@ const express = require('express'),
    accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {flags: 'a'});
 
 app.use(morgan('combined', {stream: accessLogStream}));
-
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
+//ENTRY PAGE
 app.get('/', (req, res) => {
     res.send('Welcome to my app!');
 });
 
+//TEST PAGES
 app.get('/secreturl', (req, res) => {
     res.send('This is a secret url with super top-secret content.');
 });
-
 app.get('/arbitrary', (req, res) => {
     res.send('This is a test page');
 });
@@ -204,7 +205,7 @@ let ghibliMovies = [
     },
 ]
 
-//CREATE
+//CREATE USER
 app.post('/users', (req, res) => {
     const newUser = req.body;
 
@@ -217,7 +218,7 @@ app.post('/users', (req, res) => {
     }
 });
 
-//UPDATE
+//UPDATE USERNAME
 app.put('/users/:id', (req, res) => {
     const { id } = req.params;
     const updatedUser = req.body;
@@ -232,7 +233,7 @@ app.put('/users/:id', (req, res) => {
     }
 });
 
-//POST
+//POST-ADD FAVORITE MOVIE
 app.post('/users/:id/:movieTitle', (req, res) => {
     const { id, movieTitle } = req.params;
 
@@ -246,7 +247,7 @@ app.post('/users/:id/:movieTitle', (req, res) => {
     }
 });
 
-//DELETE
+//DELETE-REMOVE FAVORITE MOVIE
 app.delete('/users/:id/:movieTitle', (req, res) => {
     const { id, movieTitle } = req.params;
 
@@ -260,7 +261,7 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
     }
 });
 
-//DELETE
+//DELETE USER
 app.delete('/users/:id', (req, res) => {
     const { id} = req.params;
 
@@ -274,12 +275,12 @@ app.delete('/users/:id', (req, res) => {
     }
 });
 
-//READ
+//READ ALL MOVIES
 app.get('/movies', (req, res) => {
     res.status(200).json(ghibliMovies)
 });
 
-//READ
+//READ MOVIE BY TITLE
 app.get('/movies/:title', (req, res) => {
     const { title } = req.params;
     const movie = ghibliMovies.find( movie => movie.Title === title );
@@ -291,7 +292,7 @@ app.get('/movies/:title', (req, res) => {
     }
 });
 
-//READ
+//READ GENRE BY NAME
 app.get('/movies/genres/:genreName', (req, res) => {
     const { genreName } = req.params;
     const genre = ghibliMovies.find( movie => movie.Genre.Name === genreName ).Genre;
@@ -303,7 +304,7 @@ app.get('/movies/genres/:genreName', (req, res) => {
     }
 });
 
-//READ
+//READ DIRECTOR BY NAME
 app.get('/movies/directors/:directorName', (req, res) => {
     const { directorName } = req.params;
     const director = ghibliMovies.find( movie => movie.Director.Name === directorName ).Director;
@@ -315,17 +316,13 @@ app.get('/movies/directors/:directorName', (req, res) => {
     }
 });
 
-app.use(express.static('public'));
-
-// app.use(bodyParser.urlencoded({
-//     extended: true
-// }));
-
+//ERROR 500 MESSAGE
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send("Oops, something broke on our end! No worries, our team of highly trained orangutans are on the job!");
 });
 
+//PORT OF CALL
 app.listen(8080, () => {
     console.log('Your app is listening on port 8080.');
 })
