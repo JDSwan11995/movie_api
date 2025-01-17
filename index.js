@@ -369,34 +369,42 @@ let ghibliMovies = [
 
 let genres = [
     {
+        _id: ObjectId('678ac6c5b2f9ef89bc4eeb8f'),
       Name: "Coming-of-Age",
       Description: "The coming-of-age subgenre features personal growth, maturation, and self-discovery of a young protagonist as they navigate the challenges and transitions of adolescence into adulthood.",
     }, //Coming-of-Age
     {
+        _id: ObjectId('678ac6d6b2f9ef89bc4eeb90'),
       Name: "Adventure",
       Description: "The adventure genre features exciting journeys, quests, or expeditions undertaken by characters who often face challenges, obstacles, and risks in pursuit of a goal.",
     }, //Adventure
     {
-      Name: "Fairy Tale",
-      Description: "The fairy tale subgenre features narratives featuring magical and fantastical elements, often focusing on themes of morality, wonder, and the triumph of good over evil.",
+        _id: ObjectId('678ac6e4b2f9ef89bc4eeb91'),
+        Name: 'Fairy Tale',
+        Description: 'The fairy tale subgenre features narratives featuring magical and fantastical elements, often focusing on themes of morality, wonder, and the triumph of good over evil.'
     }, //Fairy Tale
     {
+    _id: ObjectId('678ac6f2b2f9ef89bc4eeb92'),
       Name: "Drama",
       Description: "The drama genre is a broad category that features stories portraying human experiences, emotions, conflicts, and relationships in a realistic and emotionally impactful way.",
     }, //Drama
     {
+        _id: ObjectId('678ac70cb2f9ef89bc4eeb94'),
       Name: "Family",
       Description: "The family genre features stories specifically created to be suitable for a wide range of age groups within a family.",
     }, //Family
     {
+        _id: ObjectId('678ac6fdb2f9ef89bc4eeb93'),
       Name: "Romance",
       Description: "The romance genre features the theme of romantic relationships and emotional connections between characters.",
     }, //Romance
     {
+        _id: ObjectId('678ac731b2f9ef89bc4eeb95'),
       Name: "Period Drama",
       Description: "The period drama transports audiences to the past, immersing them in insights and offering insight into the lives of characters from different time periods.",
     }, //Period Drama
     {
+        _id: ObjectId('678ac741b2f9ef89bc4eeb96'),
       Name: "Fantasy",
       Description: "The fantasy genre features imaginative and often magical worlds, characters, and events.",
     }, //Fantasy
