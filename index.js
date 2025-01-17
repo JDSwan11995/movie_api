@@ -127,11 +127,12 @@ let directors = [
       Bio: "A talented animator and director celebrated for his exceptional attention to detail and his vital contributions to the art of animation.",
       Birth: "1950-03-31",
       Death: "1998-01-21",
-  },//Yoshifumi Kondō
+    },//Yoshifumi Kondō
 ];
 
 let ghibliMovies = [
   {
+    _id: ObjectId('678008608cad0cb2374eeb86'),
     Title: "My Neighbor Totoro",
     Description:
       "Young sisters, Satsuki and Mei, move to the countryside with their father to be near their ailing mother, they soon meet the friendly and curious spirits of the forest.",
@@ -152,6 +153,7 @@ let ghibliMovies = [
     Actors: ["Chika Sakamoto", "Noriko Hidaka", "Hitoshi Takagi"],
   }, //My Neighbor Totoro
   {
+    _id: ObjectId('678abf30b2f9ef89bc4eeb86'),
     Title: "Grave of the Fireflies",
     Description:
       "A poignant animated film about two siblings struggling to survive in wartime Japan.",
@@ -173,6 +175,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Grave of the Fireflies
   {
+    _id: ObjectId('678abf91b2f9ef89bc4eeb87'),
     Title: "Ocean Waves",
     Description:
       "A reflective coming-of-age story about friendship, love, and the complexities of adolecent emotions in a small coastal town.",
@@ -193,6 +196,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Ocean Waves
   {
+    _id: ObjectId('678abfc1b2f9ef89bc4eeb88'),
     Title: "Spirited Away",
     Description:
       "A mesmerizing tale of a young girl who finds herself in a mysterious world of spirits and must navigate its wonders and challenges to find her way home.",
@@ -213,6 +217,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Spirited Away
   {
+    _id: ObjectId('678abff0b2f9ef89bc4eeb89'),
     Title: "Tales from Earthsea",
     Description:
       "Based on the tales from Ursala K LeGuin, Tales from Earthsea is a mystical journey through a world of dragons and wizards, where a young prince and a wandering mage must confront a looming imbalance threatening their land.",
@@ -233,6 +238,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Tales from Earthsea
   {
+    _id: ObjectId('678ac00cb2f9ef89bc4eeb8a'),
     Title: "Arrietty",
     Description:
       "Based on The Borrowers by Mary Norton, Arrietty is a gentle story apout a tiny, resourceful girl from a family of 'borrowers' who forges an unlikely friendship with a human boy, changing both of their worlds.",
@@ -253,6 +259,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Arrietty
   {
+    _id: ObjectId('678ac02bb2f9ef89bc4eeb8b'),
     Title: "The Red Turtle",
     Description:
       "A wordless meditative tale about a man's life on a deserted island and the profound connection he forms with nature.",
@@ -273,6 +280,7 @@ let ghibliMovies = [
     Actors: [],
   }, //The Red Turtle
   {
+    _id: ObjectId('678ac04cb2f9ef89bc4eeb8c'),
     Title: "The Cat Returns",
     Description:
       "A whimsical tale about a girl who finds herself drawn into a fantastical world where she must navigate twists to rediscover her true self.",
@@ -293,6 +301,7 @@ let ghibliMovies = [
     Actors: [],
   }, //The Cat Returns
   {
+    _id: ObjectId('678ac084b2f9ef89bc4eeb8d'),
     Title: "Howl's Moving Castle",
     Description:
       "Based on the story by Diana Wynne Jones, Howl's Moving Castle is a magical tale of self-discovery and resilience, set in a world of shifting landscapes, mysterious magic users, and unexpected transformations.",
@@ -313,6 +322,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Howl's Moving Castle
   {
+    _id: ObjectId('6781bafe2e224354ef4eeb8c'),
     Title: "Only Yesterday",
     Description:
       "A reflective tale about a woman revisiting her childhood memories during a trip to the countryside.",
@@ -334,6 +344,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Only Yesterday
   {
+    _id: ObjectId('678ac2a3b2f9ef89bc4eeb8e'),
     Title: "Whisper of the Heart",
     Description:
       "A heartfelt coming-of-age story about a young girl discovering her creativity and the courage to pursue her dreams.",
