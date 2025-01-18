@@ -9,6 +9,12 @@ const express = require("express"),
     flags: "a",
   });
 
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
@@ -28,7 +34,7 @@ app.get("/arbitrary", (req, res) => {
 
 let users = [
   {
-    _id: ObjectId("6781ac2c2e224354ef4eeb86"),
+    _id: ObjectId('678aee6449361c6d08cb0cf5'),
     Name: "Gytha Ogg",
     Username: "NannyDearest",
     Birthday: "1968-10-05",
@@ -36,7 +42,7 @@ let users = [
     Password: "Hedgeh0gsNeverBuggered!",
   }, //Gytha Ogg
   {
-    _id: ObjectId("6781ac712e224354ef4eeb87"),
+    _id: ObjectId('678aee6749361c6d08cb0cf6'),
     Name: "Esmerelda Weatherwax",
     Username: "dont-call-me-crone",
     Birthday: "1948-04-28",
@@ -44,7 +50,7 @@ let users = [
     Password: "Good8ntNice",
   }, //Esmerelda Weatherwax
   {
-    _id: ObjectId("6781acaa2e224354ef4eeb88"),
+    _id: ObjectId('678aee6a49361c6d08cb0cf7'),
     Name: "Magrat Garlick",
     Username: "QueenofLancre",
     Birthday: "1988-11-10",
@@ -52,7 +58,7 @@ let users = [
     Password: "M@idenNoMore",
   }, //Magrat Garlick
   {
-    _id: ObjectId("6781acd22e224354ef4eeb89"),
+    _id: ObjectId('678aee6e49361c6d08cb0cf8'),
     Name: "Agnes Nitt",
     Username: "PerditaXDream",
     Birthday: "1992-01-01",
@@ -60,7 +66,7 @@ let users = [
     Password: "moonlit-nitt",
   }, //Agnes Nitt
   {
-    _id: ObjectId("6781acfd2e224354ef4eeb8a"),
+    _id: ObjectId('678aee7149361c6d08cb0cf9'),
     Name: "Tiffany Aching",
     Username: "Tir-far-thoinn",
     Birthday: "2003-05-01",
@@ -68,7 +74,7 @@ let users = [
     Password: "TheChalkWitch!",
   }, //Tiffany Aching
   {
-    _id: ObjectId("6781b82e2e224354ef4eeb8b"),
+    _id: ObjectId('678aee7449361c6d08cb0cfa'),
     Name: "Gwinifer Blackcap",
     Username: "Old-M0ther",
     Birthday: "1967-09-30",
@@ -79,50 +85,50 @@ let users = [
 
 let directors = [
   {
-    _id: ObjectId("6781bca42e224354ef4eeb8e"),
+    _id: ObjectId('678aeb2b49361c6d08cb0ce2'),
     Name: "Hayao Miyazaki",
     Bio: "A legendary Japanese animator, director, and co-founder of Studio Ghibli, known for creating imaginative and heartfelt films.",
     Birthday: "1941-01-05",
   }, //Hayao Miyazaki
   {
-    _id: ObjectId("6781bbc12e224354ef4eeb8d"),
+    _id: ObjectId('678aeb3549361c6d08cb0ce3'),
     Name: "Isao Takahata",
     Bio: "A visionary animator, director and co-founder of Studio Ghibli, known for his emotionally profound and visually unique films.",
     Birthday: "1935-10-29",
     Deathday: "2018-04-05",
   }, //Isao Takahata
   {
-    _id: ObjectId("678ab7448bc250d8044eeb86"),
+    _id: ObjectId('678aeb3849361c6d08cb0ce4'),
     Name: "Tomomi Mochizuki",
     Bio: "An anime director and storyteller known for his nuanced storytelling and ability to explore the subtleties of human relationships.",
     Birthday: "1958-12-31",
   }, //Tomomi Mochizuki
   {
-    _id: ObjectId("678ab7a38bc250d8044eeb87"),
+    _id: ObjectId('678aeb3f49361c6d08cb0ce5'),
     Name: "Goro Miyazaki",
     Bio: "A director who has carved his own path in storytelling, blending imaginative worlds with thoughtful character development while carrying forward a legacy of artistic creativity.",
     Birthday: "1967-01-21",
   }, //Goro Miyazaki
   {
-    _id: ObjectId("678ab7e78bc250d8044eeb88"),
+    _id: ObjectId('678aeb4749361c6d08cb0ce6'),
     Name: "Hiromasa Yonebayashi",
     Bio: "An animator and director known for his evocative storytelling, intricate visual style, and ability to capture the wonder of childhood and imagination.",
     Birthday: "1973-07-10",
   }, //Hiromasa Yonebayashi
   {
-    _id: ObjectId("678ab8688bc250d8044eeb89"),
+    _id: ObjectId('678aeb4b49361c6d08cb0ce7'),
     Name: "Michaël Dudok de Wit",
     Bio: "An animator, director, and artist celebrated for his distinctive, emotionally resonant animation style that blends simplicity with profound storytelling.",
     Birth: "1953-07-15",
   }, //Michaël Dudok de Wit
   {
-    _id: ObjectId("678ab8788bc250d8044eeb8a"),
+    _id: ObjectId('678aeb4e49361c6d08cb0ce8'),
     Name: "Hiroyuki Morita",
     Bio: "An animator and director known for his meticulous craftsmanship ans ability to infuse hearfelt emotion into his storytelling.",
     Birth: "1964-06-26",
   }, //Hiroyuki Morita
   {
-    _id: ObjectId("678ab88c8bc250d8044eeb8b"),
+    _id: ObjectId('678aeb5249361c6d08cb0ce9'),
     Name: "Yoshifumi Kondō",
     Bio: "A talented animator and director celebrated for his exceptional attention to detail and his vital contributions to the art of animation.",
     Birth: "1950-03-31",
@@ -132,7 +138,7 @@ let directors = [
 
 let ghibliMovies = [
   {
-    _id: ObjectId("678008608cad0cb2374eeb86"),
+    _id: ObjectId('678aed2249361c6d08cb0cea'),
     Title: "My Neighbor Totoro",
     Description:
       "Young sisters, Satsuki and Mei, move to the countryside with their father to be near their ailing mother, they soon meet the friendly and curious spirits of the forest.",
@@ -153,7 +159,7 @@ let ghibliMovies = [
     Actors: ["Chika Sakamoto", "Noriko Hidaka", "Hitoshi Takagi"],
   }, //My Neighbor Totoro
   {
-    _id: ObjectId("678abf30b2f9ef89bc4eeb86"),
+    _id: ObjectId('678aed2749361c6d08cb0ceb'),
     Title: "Grave of the Fireflies",
     Description:
       "A poignant animated film about two siblings struggling to survive in wartime Japan.",
@@ -175,7 +181,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Grave of the Fireflies
   {
-    _id: ObjectId("678abf91b2f9ef89bc4eeb87"),
+    _id: ObjectId('678aed2b49361c6d08cb0cec'),
     Title: "Ocean Waves",
     Description:
       "A reflective coming-of-age story about friendship, love, and the complexities of adolecent emotions in a small coastal town.",
@@ -196,7 +202,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Ocean Waves
   {
-    _id: ObjectId("678abfc1b2f9ef89bc4eeb88"),
+    _id: ObjectId('678aed2e49361c6d08cb0ced'),
     Title: "Spirited Away",
     Description:
       "A mesmerizing tale of a young girl who finds herself in a mysterious world of spirits and must navigate its wonders and challenges to find her way home.",
@@ -217,7 +223,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Spirited Away
   {
-    _id: ObjectId("678abff0b2f9ef89bc4eeb89"),
+    _id: ObjectId('678aed3149361c6d08cb0cee'),
     Title: "Tales from Earthsea",
     Description:
       "Based on the tales from Ursala K LeGuin, Tales from Earthsea is a mystical journey through a world of dragons and wizards, where a young prince and a wandering mage must confront a looming imbalance threatening their land.",
@@ -238,7 +244,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Tales from Earthsea
   {
-    _id: ObjectId("678ac00cb2f9ef89bc4eeb8a"),
+    _id: ObjectId('678aed3649361c6d08cb0cef'),
     Title: "Arrietty",
     Description:
       "Based on The Borrowers by Mary Norton, Arrietty is a gentle story apout a tiny, resourceful girl from a family of 'borrowers' who forges an unlikely friendship with a human boy, changing both of their worlds.",
@@ -259,7 +265,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Arrietty
   {
-    _id: ObjectId("678ac02bb2f9ef89bc4eeb8b"),
+    _id: ObjectId('678aed3c49361c6d08cb0cf0'),
     Title: "The Red Turtle",
     Description:
       "A wordless meditative tale about a man's life on a deserted island and the profound connection he forms with nature.",
@@ -280,7 +286,7 @@ let ghibliMovies = [
     Actors: [],
   }, //The Red Turtle
   {
-    _id: ObjectId("678ac04cb2f9ef89bc4eeb8c"),
+    _id: ObjectId('678aed4049361c6d08cb0cf1'),
     Title: "The Cat Returns",
     Description:
       "A whimsical tale about a girl who finds herself drawn into a fantastical world where she must navigate twists to rediscover her true self.",
@@ -301,7 +307,7 @@ let ghibliMovies = [
     Actors: [],
   }, //The Cat Returns
   {
-    _id: ObjectId("678ac084b2f9ef89bc4eeb8d"),
+    _id: ObjectId('678aed4249361c6d08cb0cf2'),
     Title: "Howl's Moving Castle",
     Description:
       "Based on the story by Diana Wynne Jones, Howl's Moving Castle is a magical tale of self-discovery and resilience, set in a world of shifting landscapes, mysterious magic users, and unexpected transformations.",
@@ -322,7 +328,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Howl's Moving Castle
   {
-    _id: ObjectId("6781bafe2e224354ef4eeb8c"),
+    _id: ObjectId('678aed4649361c6d08cb0cf3'),
     Title: "Only Yesterday",
     Description:
       "A reflective tale about a woman revisiting her childhood memories during a trip to the countryside.",
@@ -344,7 +350,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Only Yesterday
   {
-    _id: ObjectId("678ac2a3b2f9ef89bc4eeb8e"),
+    _id: ObjectId('678aed4a49361c6d08cb0cf4'),
     Title: "Whisper of the Heart",
     Description:
       "A heartfelt coming-of-age story about a young girl discovering her creativity and the courage to pursue her dreams.",
@@ -369,49 +375,49 @@ let ghibliMovies = [
 
 let genres = [
   {
-    _id: ObjectId("678ac6c5b2f9ef89bc4eeb8f"),
+    _id: ObjectId('678aefbb49361c6d08cb0d02'),
     Name: "Coming-of-Age",
     Description:
       "The coming-of-age subgenre features personal growth, maturation, and self-discovery of a young protagonist as they navigate the challenges and transitions of adolescence into adulthood.",
   }, //Coming-of-Age
   {
-    _id: ObjectId("678ac6d6b2f9ef89bc4eeb90"),
+    _id: ObjectId('678aefb849361c6d08cb0d01'),
     Name: "Adventure",
     Description:
       "The adventure genre features exciting journeys, quests, or expeditions undertaken by characters who often face challenges, obstacles, and risks in pursuit of a goal.",
   }, //Adventure
   {
-    _id: ObjectId("678ac6e4b2f9ef89bc4eeb91"),
+    _id: ObjectId('678aefb549361c6d08cb0d00'),
     Name: "Fairy Tale",
     Description:
       "The fairy tale subgenre features narratives featuring magical and fantastical elements, often focusing on themes of morality, wonder, and the triumph of good over evil.",
   }, //Fairy Tale
   {
-    _id: ObjectId("678ac6f2b2f9ef89bc4eeb92"),
+    _id: ObjectId('678aefb349361c6d08cb0cff'),
     Name: "Drama",
     Description:
       "The drama genre is a broad category that features stories portraying human experiences, emotions, conflicts, and relationships in a realistic and emotionally impactful way.",
   }, //Drama
   {
-    _id: ObjectId("678ac70cb2f9ef89bc4eeb94"),
+    _id: ObjectId('678aefaf49361c6d08cb0cfe'),
     Name: "Family",
     Description:
       "The family genre features stories specifically created to be suitable for a wide range of age groups within a family.",
   }, //Family
   {
-    _id: ObjectId("678ac6fdb2f9ef89bc4eeb93"),
-    Name: "Romance",
+    _id: ObjectId('678aefad49361c6d08cb0cfd'),
+        Name: "Romance",
     Description:
       "The romance genre features the theme of romantic relationships and emotional connections between characters.",
   }, //Romance
   {
-    _id: ObjectId("678ac731b2f9ef89bc4eeb95"),
+    _id: ObjectId('678aefaa49361c6d08cb0cfc'),
     Name: "Period Drama",
     Description:
       "The period drama transports audiences to the past, immersing them in insights and offering insight into the lives of characters from different time periods.",
   }, //Period Drama
   {
-    _id: ObjectId("678ac741b2f9ef89bc4eeb96"),
+    _id: ObjectId('678aefa349361c6d08cb0cfb'),
     Name: "Fantasy",
     Description:
       "The fantasy genre features imaginative and often magical worlds, characters, and events.",
