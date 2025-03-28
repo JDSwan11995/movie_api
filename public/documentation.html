@@ -62,43 +62,59 @@
                     <td>No Request Body</td>
                     <td>/movies/directors/:director will retrun a JSON object about the specified director.</td>
                 </tr>                
-                <tr>
+                <tr> 
                     <td>Create a new user</td>
                     <td>/users</td>
                     <td>This is a POST Request</td>
                     <td>The expected Request Body should be a JSON object structured like this. 
-                        <pre>{ name: 'Albert Newman', favoriteMovies: [],} </pre>
+                        <pre>
+                            {
+                            Name: req.body.Name,
+                            Username: req.body.Username,
+                            Password: req.body.Password,
+                            Email: req.body.Email,
+                            Birthday: req.body.Birthday
+                            }
+                        </pre>
                     </td>
                     <td>If the name field is filled and the favoriteMovies field contains a movie on the list then a new user is created.</td>                
                 </tr>
                 <tr>
-                    <td>Update User by ID</td>
-                    <td>/user/:id</td>
+                    <td>Update User by Username</td>
+                    <td>/user/:Username</td>
                     <td>This is a PUT Request</td>
                     <td>The expected Request Body should be a JSON object structured like this. 
-                        <pre>{ name: 'Alice Newman', favoriteMovies:[],}</pre>
+                        <pre>
+                            { 
+                            Name: req.body.Name,
+                            Username: req.body.Username,
+                            Password: req.body.Password,
+                            Email: req.body.Email,
+                            Birthday: req.body.Birthday
+                        }
+                    </pre>
                     </td>
                     <td>If the ID number is in the system and the fields are filled out correctly a message will be sent showing the updated data.</td>
                 </tr>
                 <tr>
                     <td>Add a movie to the Favorites list</td>
-                    <td>/users/:id/:movieTitle</td>                    
+                    <td>/users/:Username/:movieTitle</td>                    
                     <td>This is also a POST Request</td>
                     <td>The expected Request Body should be a JSON object structured like this.
-                        <pre> { title: [] }</pre>
+                        <pre> { "favoriteMovies": [":movieTitle"] }</pre>
                     </td>
                     <td>If the User ID and the movie title exist, the user will recieve a message letting them know it has been added to their favorites list.</td>
                 </tr>
                 <tr>
                     <td>Remove a movie from the favorites list</td>
-                    <td>/users/:id/:movieTitle</td>
+                    <td>/users/:Username/:movieTitle</td>
                     <td>This is a DELETE Request</td>
                     <td>No Request Body</td>
                     <td>If the User ID exists, the user will recieve a message letting them know it has been removed from their favorites list.</td>                
                 </tr>
                 <tr>
                     <td>Delete User</td>
-                    <td>/users/:id</td>
+                    <td>/users/:Username</td>
                     <td>This is also a DELETE Request</td>
                     <td>No Request Body</td>
                     <td>If the user exists, they are removed and sent a message confirming the removal.</td>                
@@ -107,7 +123,7 @@
         </table>
     </div>
     <div>Genre descriptions taken from IMDb.</div>
-    <div>Usernames taken from Sir Terry Pratchett's Discworld series.</div>
+    <div>Users names taken from Sir Terry Pratchett's Discworld series.</div>
 </body>
 
 </html>
