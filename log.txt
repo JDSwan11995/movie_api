@@ -330,3 +330,7 @@ URL: /favicon.ico/nTimestamp: Sat Oct 19 2024 19:18:04 GMT-0500 (Central Dayligh
 ::1 - - [28/Mar/2025:20:59:09 +0000] "GET /users/NannyDearest/movies/My%20Neighbor%20Totoro HTTP/1.1" 404 187 "-" "PostmanRuntime/7.43.2"
 ::1 - - [28/Mar/2025:20:59:15 +0000] "POST /users/NannyDearest/movies/My%20Neighbor%20Totoro HTTP/1.1" 404 188 "-" "PostmanRuntime/7.43.2"
 ::1 - - [28/Mar/2025:21:07:08 +0000] "GET /movies/Hayao%20Miyazaki HTTP/1.1" 400 32 "-" "PostmanRuntime/7.43.2"
+::ffff:127.0.0.1 - - [28/Mar/2025:21:38:26 +0000] "GET /users HTTP/1.1" 201 1514 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0"
+::ffff:127.0.0.1 - - [28/Mar/2025:21:38:26 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8080/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0"
+::1 - - [28/Mar/2025:21:39:09 +0000] "POST /users/NannyDearest/movies/My%20Neighbor%20Totoro HTTP/1.1" 404 188 "-" "PostmanRuntime/7.43.2"
+::1 - - [28/Mar/2025:21:45:49 +0000] "POST /users/NannyDearest/movies/My%20Neighbor%20Totoro HTTP/1.1" 404 188 "-" "PostmanRuntime/7.43.2"
