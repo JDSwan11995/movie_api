@@ -338,3 +338,8 @@ URL: /favicon.ico/nTimestamp: Sat Oct 19 2024 19:18:04 GMT-0500 (Central Dayligh
 ::ffff:127.0.0.1 - - [19/Apr/2025:18:08:59 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8080/users" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:137.0) Gecko/20100101 Firefox/137.0"
 ::1 - - [19/Apr/2025:18:18:03 +0000] "POST /users/NannyDearest/movies/title/Whisper%20of%20the%20Heart HTTP/1.1" 200 241 "-" "PostmanRuntime/7.43.3"
 ::1 - - [19/Apr/2025:18:20:56 +0000] "POST /users/NannyDearest/movies/title/My%20Neighbor%20Totoro HTTP/1.1" 500 134 "-" "PostmanRuntime/7.43.3"
+::1 - - [19/Apr/2025:18:25:19 +0000] "POST /users/NannyDearest/movies/title/My%20Neighbor%20Totoro HTTP/1.1" 200 241 "-" "PostmanRuntime/7.43.3"
+::1 - - [19/Apr/2025:18:26:12 +0000] "POST /users/NannyDearest/movies/title/The%20Cat%20Returns HTTP/1.1" 200 241 "-" "PostmanRuntime/7.43.3"
+::1 - - [19/Apr/2025:18:26:15 +0000] "POST /users/NannyDearest/movies/title/The%20Cat%20Returns HTTP/1.1" 200 241 "-" "PostmanRuntime/7.43.3"
+::1 - - [19/Apr/2025:18:26:30 +0000] "DELETE /users/NannyDearest/movies/title/The%20Cat%20Returns HTTP/1.1" 404 193 "-" "PostmanRuntime/7.43.3"
+::1 - - [19/Apr/2025:18:27:10 +0000] "DELETE /users/NannyDearest/movies/title/My%20Neighbor%20Totoro HTTP/1.1" 404 196 "-" "PostmanRuntime/7.43.3"
