@@ -29,6 +29,25 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
+const cors = require('cors');
+
+let allowedOrigins = ['http://localhost:8000', 'http://testsite.com'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ //If a specific origin isn't found on the list of allowed origins
+      let message = 'The CORS policy for this application does not allow access from origin ' +origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
 //ENTRY PAGE
 app.get("/", (req, res) => {
   res.send("Welcome to my app!");
@@ -446,16 +465,17 @@ let genres = [
  Birthday: Date (yyyy-dd-mm)
 }*/
 app.post("/users", async (req, res) => {
-  await Users.findOne({ Username: req.body.Username })
+  let hashedPassword = Users.hashPassword(req.body.Password);
+  await Users.findOne({ Username: req.body.Username }) //Search to see if the requested username is already used
     .then((user) => {
-      if (user) {
-        return res.status(404).send(req.body.Username + "Hey, there's someone that has that Username, please try something else.");
+      if (user) { //If the Username is already in use, send a response confirming such
+        return res.status(400).send(req.body.Username + " Hey, there's someone that has that Username, please try something else.");
       } else {
         Users
           .create({
             Name: req.body.Name,
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
