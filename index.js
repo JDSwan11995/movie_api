@@ -29,22 +29,8 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-const cors = require('cors');
-
-let allowedOrigins = ['http://localhost:8000', 'http://testsite.com'];
-
-app.use(cors({
-  origin: (origin, callback) => {
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){ //If a specific origin isn't found on the list of allowed origins
-      let message = 'The CORS policy for this application does not allow access from origin ' +origin;
-      return callback(new Error(message ), false);
-    }
-    return callback(null, true);
-  }
-}));
-
 let auth = require('./auth')(app);
+
 const passport = require('passport');
 require('./passport');
 
@@ -465,17 +451,16 @@ let genres = [
  Birthday: Date (yyyy-dd-mm)
 }*/
 app.post("/users", async (req, res) => {
-  let hashedPassword = Users.hashPassword(req.body.Password);
-  await Users.findOne({ Username: req.body.Username }) //Search to see if the requested username is already used
+  await Users.findOne({ Username: req.body.Username })
     .then((user) => {
-      if (user) { //If the Username is already in use, send a response confirming such
-        return res.status(400).send(req.body.Username + " Hey, there's someone that has that Username, please try something else.");
+      if (user) {
+        return res.status(404).send(req.body.Username + " Hey, there's someone that has that Username, please try something else.");
       } else {
         Users
           .create({
             Name: req.body.Name,
             Username: req.body.Username,
-            Password: hashedPassword,
+            Password: req.body.Password,
             Email: req.body.Email,
             Birthday: req.body.Birthday
           })
@@ -517,24 +502,29 @@ app.get('/users/:Username', async (req, res) => {
 });
 
 //UPDATE USER
-app.put("/users/:Username", async (req, res) => {
-  await Users.findOneAndUpdate({ Username: req.params.Username }, {$set:
-    {
-      Name: req.body.Name,
-      Username: req.body.Username,
-      Password: req.body.Password,
-      Email: req.body.Email,
-      Birthday: req.body.Birthday
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    // CONDITION TO CHECK ADDED HERE
+    if(req.user.Username !== req.params.Username){
+        return res.status(400).send('Permission denied');
     }
-  },
-  { new: true}) //This line makes sure that the updated document is returned
-  .then((updatedUser) => {
-    res.json(updatedUser);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send('Error: ' + err);
-  })
+    // CONDITION ENDS
+    await Users.findOneAndUpdate({ Username: req.params.Username }, {
+        $set:
+        {
+            Username: req.body.Username,
+            Password: req.body.Password,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+        }
+    },
+        { new: true }) // This line makes sure that the updated document is returned
+        .then((updatedUser) => {
+            res.json(updatedUser);
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).send('Error: ' + err);
+        })
 });
 
 //ADD FAVORITE MOVIE
@@ -584,8 +574,15 @@ app.delete("/users/:Username", async (req, res) => {
 });
 
 //READ ALL MOVIES
-app.get("/movies", (req, res) => {
-  res.status(200).json(ghibliMovies);
+app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  await Movies.find()
+    .then((ghibliMovies) => {
+      res.status(201).json(ghibliMovies);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
 });
 
 //READ MOVIE BY TITLE

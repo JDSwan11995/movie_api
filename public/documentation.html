@@ -80,6 +80,21 @@
                     <td>If the name field is filled and the favoriteMovies field contains a movie on the list then a new user is created.</td>                
                 </tr>
                 <tr>
+                    <td>User Login</td>
+                    <td>/login</td>
+                    <td>This is a POST request</td>
+                    <td>
+                        The Expected Params are: 
+                        <pre>
+                            {
+                                Username: username,
+                                Password: password
+                            }
+                        </pre>
+                    </td>
+                    <td>If the entered information is contained in our system, the user will recieve a generated token to access other parts of the site.</td>
+                </tr>
+                <tr>
                     <td>Update User by Username</td>
                     <td>/user/:Username</td>
                     <td>This is a PUT Request</td>
