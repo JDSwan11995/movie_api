@@ -23,6 +23,10 @@ let Users = Models.User,
                             message: "Hey, we don't recognize that Username, pleace check your spelling and try again.",
                         });
                     }
+                    if (!user.validatePassword(password)) {
+                        console.log('incorrect password');
+                        return callback(null, false, {message: "Check the spelling, something is incorrect."})
+                    }
                     console.log('finished');
                     return callback(null, user);
                 })

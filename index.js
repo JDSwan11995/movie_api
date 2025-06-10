@@ -15,9 +15,10 @@ const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
 
-mongoose.connect("mongodb://localhost:27017/ghibliDataBase")
+mongoose
+  .connect("mongodb://localhost:27017/ghibliDataBase")
   .then(() => console.log("Connected to the MongoDB Database."))
-  .catch(err => console.error("Connection Error", err));
+  .catch((err) => console.error("Connection Error", err));
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
@@ -29,19 +30,38 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(bodyParser.json());
 app.use(express.static("public"));
 
-let auth = require('./auth')(app);
+const cors = require("cors");
+let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        let message =
+          "The CORS policy for this application doesn't allow access from origin " +
+          origin;
+        return callback(new Error(message), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 
-const passport = require('passport');
-require('./passport');
+let auth = require("./auth")(app);
+
+const passport = require("passport");
+require("./passport");
+
+const {check, validationResult} = require('express-validator');
 
 //ENTRY PAGE
 app.get("/", (req, res) => {
   res.send("Welcome to my app!");
 });
 
-//DOCUMENTATION PAGE  
+//DOCUMENTATION PAGE
 app.get("/docs", (req, res) => {
-  res.sendFile('public/documentation.html', {root: __dirname});
+  res.sendFile("public/documentation.html", { root: __dirname });
 });
 
 //TEST PAGES
@@ -52,7 +72,7 @@ app.get("/arbitrary", (req, res) => {
   res.send("This is a test page");
 });
 
-//ASSETS 
+//ASSETS
 let users = [
   {
     _id: "678aee6449361c6d08cb0cf5",
@@ -102,6 +122,30 @@ let users = [
     Email: "pig-borer-of-sidling@clacksmail.gnu",
     Password: "Cow-shouting-4-dummies",
   }, //Gwinifer Blackcap
+  {
+    _id: "67ddedcefac61d7b3dac2c68",
+    Name: "Eskarina Smith",
+    Username: "Esk-The_Female_Wizard",
+    Birthday: "1979-08-03",
+    Password: "I'll-do-both!",
+    Email: "dualmagic@clacksmail.gnu",
+  }, //Eskarina Smith
+  {
+    _id:"68488126e38af59e02fc274c",
+    Name: "Adora Belle Dearheart",
+    Username: "A.B.Dearheart",
+    Birthday: "1982-11-05",
+    Password: "Moist-Is-An-Idiot",
+    Email: "GolumTrustAdmin@clacksmail.gnu",
+  },//Adora Belle Dearheart
+  {
+    _id:"6848843b7936719cdcfec33d",
+    Name:"Moist Von Lipwig",
+    Username:"Golden_Suit",
+    Password: "Trust-Me!",
+    Birthday: "1980-06-15",
+    Email: "MoistVonLipwig@clacksmail.gnu",
+  },//Moist Von Lipwig
 ];
 let directors = [
   {
@@ -157,7 +201,7 @@ let directors = [
 ];
 let ghibliMovies = [
   {
-    _id:('678aed2249361c6d08cb0cea'),
+    _id: "678aed2249361c6d08cb0cea",
     Title: "My Neighbor Totoro",
     Description:
       "Young sisters, Satsuki and Mei, move to the countryside with their father to be near their ailing mother, they soon meet the friendly and curious spirits of the forest.",
@@ -178,7 +222,7 @@ let ghibliMovies = [
     Actors: ["Chika Sakamoto", "Noriko Hidaka", "Hitoshi Takagi"],
   }, //My Neighbor Totoro
   {
-    _id:('678aed2749361c6d08cb0ceb'),
+    _id: "678aed2749361c6d08cb0ceb",
     Title: "Grave of the Fireflies",
     Description:
       "A poignant animated film about two siblings struggling to survive in wartime Japan.",
@@ -200,7 +244,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Grave of the Fireflies
   {
-    _id:('678aed2b49361c6d08cb0cec'),
+    _id: "678aed2b49361c6d08cb0cec",
     Title: "Ocean Waves",
     Description:
       "A reflective coming-of-age story about friendship, love, and the complexities of adolecent emotions in a small coastal town.",
@@ -221,7 +265,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Ocean Waves
   {
-    _id:('678aed2e49361c6d08cb0ced'),
+    _id: "678aed2e49361c6d08cb0ced",
     Title: "Spirited Away",
     Description:
       "A mesmerizing tale of a young girl who finds herself in a mysterious world of spirits and must navigate its wonders and challenges to find her way home.",
@@ -242,7 +286,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Spirited Away
   {
-    _id:('678aed3149361c6d08cb0cee'),
+    _id: "678aed3149361c6d08cb0cee",
     Title: "Tales from Earthsea",
     Description:
       "Based on the tales from Ursala K LeGuin, Tales from Earthsea is a mystical journey through a world of dragons and wizards, where a young prince and a wandering mage must confront a looming imbalance threatening their land.",
@@ -263,7 +307,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Tales from Earthsea
   {
-    _id:('678aed3649361c6d08cb0cef'),
+    _id: "678aed3649361c6d08cb0cef",
     Title: "Arrietty",
     Description:
       "Based on The Borrowers by Mary Norton, Arrietty is a gentle story apout a tiny, resourceful girl from a family of 'borrowers' who forges an unlikely friendship with a human boy, changing both of their worlds.",
@@ -284,7 +328,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Arrietty
   {
-    _id:('678aed3c49361c6d08cb0cf0'),
+    _id: "678aed3c49361c6d08cb0cf0",
     Title: "The Red Turtle",
     Description:
       "A wordless meditative tale about a man's life on a deserted island and the profound connection he forms with nature.",
@@ -305,7 +349,7 @@ let ghibliMovies = [
     Actors: [],
   }, //The Red Turtle
   {
-    _id:('678aed4049361c6d08cb0cf1'),
+    _id: "678aed4049361c6d08cb0cf1",
     Title: "The Cat Returns",
     Description:
       "A whimsical tale about a girl who finds herself drawn into a fantastical world where she must navigate twists to rediscover her true self.",
@@ -326,7 +370,7 @@ let ghibliMovies = [
     Actors: [],
   }, //The Cat Returns
   {
-    _id:('678aed4249361c6d08cb0cf2'),
+    _id: "678aed4249361c6d08cb0cf2",
     Title: "Howl's Moving Castle",
     Description:
       "Based on the story by Diana Wynne Jones, Howl's Moving Castle is a magical tale of self-discovery and resilience, set in a world of shifting landscapes, mysterious magic users, and unexpected transformations.",
@@ -347,7 +391,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Howl's Moving Castle
   {
-    _id:('678aed4649361c6d08cb0cf3'),
+    _id: "678aed4649361c6d08cb0cf3",
     Title: "Only Yesterday",
     Description:
       "A reflective tale about a woman revisiting her childhood memories during a trip to the countryside.",
@@ -369,7 +413,7 @@ let ghibliMovies = [
     Actors: [],
   }, //Only Yesterday
   {
-    _id:('678aed4a49361c6d08cb0cf4'),
+    _id: "678aed4a49361c6d08cb0cf4",
     Title: "Whisper of the Heart",
     Description:
       "A heartfelt coming-of-age story about a young girl discovering her creativity and the courage to pursue her dreams.",
@@ -393,49 +437,49 @@ let ghibliMovies = [
 ];
 let genres = [
   {
-    _id:('678aefbb49361c6d08cb0d02'),
+    _id: "678aefbb49361c6d08cb0d02",
     Title: "Coming-of-Age",
     Description:
       "The coming-of-age subgenre features personal growth, maturation, and self-discovery of a young protagonist as they navigate the challenges and transitions of adolescence into adulthood.",
   }, //Coming-of-Age
   {
-    _id:('678aefb849361c6d08cb0d01'),
+    _id: "678aefb849361c6d08cb0d01",
     Title: "Adventure",
     Description:
       "The adventure genre features exciting journeys, quests, or expeditions undertaken by characters who often face challenges, obstacles, and risks in pursuit of a goal.",
   }, //Adventure
   {
-    _id:('678aefb549361c6d08cb0d00'),
+    _id: "678aefb549361c6d08cb0d00",
     Title: "Fairy Tale",
     Description:
       "The fairy tale subgenre features narratives featuring magical and fantastical elements, often focusing on themes of morality, wonder, and the triumph of good over evil.",
   }, //Fairy Tale
   {
-    _id:('678aefb349361c6d08cb0cff'),
+    _id: "678aefb349361c6d08cb0cff",
     Title: "Drama",
     Description:
       "The drama genre is a broad category that features stories portraying human experiences, emotions, conflicts, and relationships in a realistic and emotionally impactful way.",
   }, //Drama
   {
-    _id:('678aefaf49361c6d08cb0cfe'),
+    _id: "678aefaf49361c6d08cb0cfe",
     Title: "Family",
     Description:
       "The family genre features stories specifically created to be suitable for a wide range of age groups within a family.",
   }, //Family
   {
-    _id:('678aefad49361c6d08cb0cfd'),
+    _id: "678aefad49361c6d08cb0cfd",
     Title: "Romance",
     Description:
       "The romance genre features the theme of romantic relationships and emotional connections between characters.",
   }, //Romance
   {
-    _id:('678aefaa49361c6d08cb0cfc'),
+    _id: "678aefaa49361c6d08cb0cfc",
     Title: "Period Drama",
     Description:
       "The period drama transports audiences to the past, immersing them in insights and offering insight into the lives of characters from different time periods.",
   }, //Period Drama
   {
-    _id:('678aefa349361c6d08cb0cfb'),
+    _id: "678aefa349361c6d08cb0cfb",
     Title: "Fantasy",
     Description:
       "The fantasy genre features imaginative and often magical worlds, characters, and events.",
@@ -450,140 +494,175 @@ let genres = [
  Email: String,
  Birthday: Date (yyyy-dd-mm)
 }*/
-app.post("/users", async (req, res) => {
+app.post("/users",
+  [
+    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
+  ], async (req, res) => {
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array()});
+    }
+  let hashedPassword = Users.hashPassword(req.body.Password);
   await Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
-        return res.status(404).send(req.body.Username + " Hey, there's someone that has that Username, please try something else.");
+        return res
+          .status(404)
+          .send(
+            req.body.Username +
+              " Hey, there's someone that has that Username, please try something else."
+          );
       } else {
-        Users
-          .create({
-            Name: req.body.Name,
-            Username: req.body.Username,
-            Password: req.body.Password,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
+        Users.create({
+          Name: req.body.Name,
+          Username: req.body.Username,
+          Password: hashedPassword,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday,
+        })
+          .then((user) => {
+            res.status(201).json(user);
           })
-          .then((user) =>{res.status(201).json(user) })
           .catch((error) => {
             console.error(error);
-            res.status(500).send('Error: ' + error);
-          })
+            res.status(500).send("Error: " + error);
+          });
       }
     })
     .catch((error) => {
       console.error(error);
-      res.status(500).send('Error: ' + error);
+      res.status(500).send("Error: " + error);
     });
 });
 
 //GET ALL USERS
-app.get('/users', async (req, res) => {
+app.get("/users", async (req, res) => {
   await Users.find()
-  .then((users) => {
-    res.status(201).json(users);
-  })
-  .catch ((err) => {
-    console.error(err);
-    res.status(500).send('Error: '+ err);
-  });
+    .then((users) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
 });
 
 //GET A USER BY USERNAME
-app.get('/users/:Username', async (req, res) => {
+app.get("/users/:Username", async (req, res) => {
   await Users.findOne({ Username: req.params.Username })
-  .then((user) => {
-    res.json(user);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send('Error: ' + err);
-  });
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
 });
 
 //UPDATE USER
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), async (req, res) => {
+app.put(
+  "/users/:Username",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
     // CONDITION TO CHECK ADDED HERE
-    if(req.user.Username !== req.params.Username){
-        return res.status(400).send('Permission denied');
+    if (req.user.Username !== req.params.Username) {
+      return res.status(400).send("Permission denied");
     }
     // CONDITION ENDS
-    await Users.findOneAndUpdate({ Username: req.params.Username }, {
-        $set:
-        {
-            Username: req.body.Username,
-            Password: req.body.Password,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
-        }
-    },
-        { new: true }) // This line makes sure that the updated document is returned
-        .then((updatedUser) => {
-            res.json(updatedUser);
-        })
-        .catch((err) => {
-            console.log(err);
-            res.status(500).send('Error: ' + err);
-        })
-});
+    await Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $set: {
+          Username: req.body.Username,
+          Password: req.body.Password,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday,
+        },
+      },
+      { new: true }
+    ) // This line makes sure that the updated document is returned
+      .then((updatedUser) => {
+        res.json(updatedUser);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //ADD FAVORITE MOVIE
 app.post("/users/:Username/movies/:movieID", async (req, res) => {
-  await Users.findOneAndUpdate({Username: req.params.Username}, {
-    $push: {FavoriteMovies: req.params.MovieID}
-  },
-  {new: true })//This line makes sure that the updated document is returned
-  .then((updatedUser) => {
-    res.json(updatedUser);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send('Error: ' + err);
-  });
+  await Users.findOneAndUpdate(
+    { Username: req.params.Username },
+    {
+      $push: { FavoriteMovies: req.params.MovieID },
+    },
+    { new: true }
+  ) //This line makes sure that the updated document is returned
+    .then((updatedUser) => {
+      res.json(updatedUser);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
 });
 
 //REMOVE FAVORITE MOVIE
 app.delete("/users/:Username/:movieID", async (req, res) => {
-  await Users.findOneAndUpdate({Username: req.params.Username}, {
-    $pull: {FavoriteMovies: req.params.MovieID}
-  },
-  {new:true })//This line makes sure that the updated document is returned
-  .then((updatedUser) => {
-    res.json(updatedUser); 
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send('Error: ' + err);
-  });
+  await Users.findOneAndUpdate(
+    { Username: req.params.Username },
+    {
+      $pull: { FavoriteMovies: req.params.MovieID },
+    },
+    { new: true }
+  ) //This line makes sure that the updated document is returned
+    .then((updatedUser) => {
+      res.json(updatedUser);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
 });
 
 //DELETE USER
 app.delete("/users/:Username", async (req, res) => {
-  await Users.findOneAndDelete({Username: req.params.Username})
-  .then((user) => {
-    if(!user) {
-      res.status(400).send('That user, ' + req.params.Username + ' was not found');
-    } else {
-      res.status(200).send(req.params.Username + ' was deleted');
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send('Error: ' + err);
-  });
+  await Users.findOneAndDelete({ Username: req.params.Username })
+    .then((user) => {
+      if (!user) {
+        res
+          .status(400)
+          .send("That user, " + req.params.Username + " was not found");
+      } else {
+        res.status(200).send(req.params.Username + " was deleted");
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
 });
 
 //READ ALL MOVIES
-app.get('/movies', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  await Movies.find()
-    .then((ghibliMovies) => {
-      res.status(201).json(ghibliMovies);
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send('Error: ' + error);
-    });
-});
+app.get(
+  "/movies",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    await Movies.find()
+      .then((ghibliMovies) => {
+        res.status(201).json(ghibliMovies);
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      });
+  }
+);
 
 //READ MOVIE BY TITLE
 app.get("/movies/:title", (req, res) => {
@@ -600,7 +679,8 @@ app.get("/movies/:title", (req, res) => {
 //READ GENRE BY NAME
 app.get("/movies/genres/:genreName", (req, res) => {
   const { genreName } = req.params;
-  const genre = ghibliMovies.find((movie) => movie.Genre.Name === genreName
+  const genre = ghibliMovies.find(
+    (movie) => movie.Genre.Name === genreName
   ).Genre;
 
   if (genre) {
@@ -635,6 +715,7 @@ app.use((err, req, res, next) => {
 });
 
 //PORT OF CALL
-app.listen(8080, () => {
-  console.log("Your app is listening on port 8080.");
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+  console.log("Your app is listening on port " + port);
 });
