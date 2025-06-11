@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "678aeb2b49361c6d08cb0ce2",
+    "Name": "Hayao Miyazaki",
+    "Bio": "A legendary Japanese animator, director, and co-founder of Studio Ghibli, known for creating imaginative and heartfelt films.",
+    "Birthday": "1941-01-05"
+  },
+  {
+    "_id": "678aeb3549361c6d08cb0ce3",
+    "Name": "Isao Takahata",
+    "Bio": "A visionary animator, director and co-founder of Studio Ghibli, known for his emotionally profound and visually unique films.",
+    "Birthday": "1935-10-29",
+    "Deathday": "2018-04-05"
+  },
+  {
+    "_id": "678aeb3849361c6d08cb0ce4",
+    "Name": "Tomomi Mochizuki",
+    "Bio": "An anime director and storyteller known for his nuanced storytelling and ability to explore the subtleties of human relationships.",
+    "Birthday": "1958-12-31"
+  },
+  {
+    "_id": "678aeb3f49361c6d08cb0ce5",
+    "Name": "Goro Miyazaki",
+    "Bio": "A director who has carved his own path in storytelling, blending imaginative worlds with thoughtful character development while carrying forward a legacy of artistic creativity.",
+    "Birthday": "1967-01-21"
+  },
+  {
+    "_id": "678aeb4749361c6d08cb0ce6",
+    "Name": "Hiromasa Yonebayashi",
+    "Bio": "An animator and director known for his evocative storytelling, intricate visual style, and ability to capture the wonder of childhood and imagination.",
+    "Birthday": "1973-07-10"
+  },
+  {
+    "_id": "678aeb4b49361c6d08cb0ce7",
+    "Name": "Michaël Dudok de Wit",
+    "Bio": "An animator, director, and artist celebrated for his distinctive, emotionally resonant animation style that blends simplicity with profound storytelling.",
+    "Birthday": "1953-07-15"
+  },
+  {
+    "_id": "678aeb4e49361c6d08cb0ce8",
+    "Name": "Hiroyuki Morita",
+    "Bio": "An animator and director known for his meticulous craftsmanship ans ability to infuse hearfelt emotion into his storytelling.",
+    "Birthday": "1964-06-26"
+  },
+  {
+    "_id": "678aeb5249361c6d08cb0ce9",
+    "Name": "Yoshifumi Kondō",
+    "Bio": "A talented animator and director celebrated for his exceptional attention to detail and his vital contributions to the art of animation.",
+    "Birthday": "1950-03-31",
+    "Deathday": "1998-01-21"
+  }
+]

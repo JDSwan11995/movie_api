@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "678aefa349361c6d08cb0cfb",
+    "Name": "Fantasy",
+    "Description": "The fantasy genre features imaginative and often magical worlds, characters, and events."
+  },
+  {
+    "_id": "678aefaa49361c6d08cb0cfc",
+    "Name": "Period Drama",
+    "Description": "The period drama transports audiences to the past, immersing them in insights and offering insight into the lives of characters from different time periods."
+  },
+  {
+    "_id": "678aefad49361c6d08cb0cfd",
+    "Name": "Romance",
+    "Description": "The romance genre features the theme of romantic relationships and emotional connections between characters."
+  },
+  {
+    "_id": "678aefaf49361c6d08cb0cfe",
+    "Name": "Family",
+    "Description": "The family genre features stories specifically created to be suitable for a wide range of age groups within a family."
+  },
+  {
+    "_id": "678aefb349361c6d08cb0cff",
+    "Name": "Drama",
+    "Description": "The drama genre is a broad category that features stories portraying human experiences, emotions, conflicts, and relationships in a realistic and emotionally impactful way."
+  },
+  {
+    "_id": "678aefb549361c6d08cb0d00",
+    "Name": "Fairy Tale",
+    "Description": "The fairy tale subgenre features narratives featuring magical and fantastical elements, often focusing on themes of morality, wonder, and the triumph of good over evil."
+  },
+  {
+    "_id": "678aefb849361c6d08cb0d01",
+    "Name": "Adventure",
+    "Description": "The adventure genre features exciting journeys, quests, or expeditions undertaken by characters who often face challenges, obstacles, and risks in pursuit of a goal."
+  },
+  {
+    "_id": "678aefbb49361c6d08cb0d02",
+    "Name": "Coming-of-Age",
+    "Description": "The coming-of-age subgenre features personal growth, maturation, and self-discovery of a young protagonist as they navigate the challenges and transitions of adolescence into adulthood."
+  }
+]
