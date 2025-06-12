@@ -1,4 +1,4 @@
-const jwtSecret =  'Truth-Justice-Freedom-ReasonablyPricedLove-HardBoiledEgg';
+const jwtSecret =  process.env.JWT_SECRET;
 
 const jwt = require('jsonwebtoken'),
     passport = require('passport');
@@ -20,7 +20,7 @@ module.exports = (router) => {
             if (error || !user) {
                 return res.status(400).json({
                     message: "Something's not right, check the entry and try again.",
-                    user: user
+                    user: user,
                 });
             }
             req.login(user, {session: false}, (error) =>{
@@ -32,4 +32,4 @@ module.exports = (router) => {
             });
         })(req, res);
     });
-}
+};

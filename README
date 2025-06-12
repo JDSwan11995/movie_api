@@ -1,0 +1,66 @@
+# GhibliAPI 
+This API is the information base that fuels my GhibliAPI movie application. The intent is to allow users to get information about a small collection of movies from Studio Ghibli including genre, directors, some actors, and descriptions of those movies. 
+
+--
+
+## Table of Contents
+-[Project Overview](#project-overview)
+-[Tech Stack](#tech-stack)
+-[Deployment](#deployment)
+-[Authentication](#authentication)
+-[API Endpoints](#api-endpoints)
+
+--
+
+## Project Overview
+The GhibliAPI provideds movie, director, genre, and users information with full CRUD (Create, Read, Update, Delete) support. Users also have the ability to register an account, add movies to a favorites list, and update profiles later on if needed. Check out the URL!
+https://ghibliheroku-f28bf5d9329a.herokuapp.com/
+
+--
+
+## Tech Stack
+- **Node.js** - A cross-platform runtime environment
+- **Express** - A minimalist web framework for Node.js
+- **MongoDB** - A NoSQL database for storing movie and user data
+- **Mongoose** - Object Data Modeling (ODM) which provides a schema-based solution for MongoDB and Node.js
+- **JWT** - JSON Web Token used to create data with signatures and or encryption
+- **Passport.js** - A modular library used to authenticate users in Express based applications
+- **Heroku** - A cloud platform for web hosting
+- **MongoDB Atlas** - A cloud hosting MongoDB service
+- **HTML & JavaScript (.html & .js)** - Primary languages used to structure the API
+
+--
+
+## Deployment
+- The API is deployed through **Heroku** with the data connected to a **MongoDB Atlas** cluster for security and persistence
+
+--
+
+## Authentication
+*The API uses **JWT and HTTP authentication** as well as **password hashing** as means of security.
+
+--
+
+## API Endpoints
+
+### Movie-related Endpoints
+
+| Endpoint                  | Method | Description                          |
+|---------------------------|--------|------------------------------------|
+| `/movies`                 | GET    | Get all movies                     |
+| `/movies/:title`          | GET    | Get a movie by title               |
+| `/genres/:name`           | GET    | Get info about a genre             |
+| `/directors/:name`        | GET    | Get info about a director          |
+
+### User-related Endpoints
+
+| Endpoint                                     | Method | Description                           |
+|----------------------------------------------|--------|---------------------------------------|
+| `/users`                                     | POST   | Register a new user                   |
+| `/users/:username`                           | GET    | Get user info                         |
+| `/users/:username`                           | PUT    | Update user info                      |
+| `/users/:username`                           | DELETE | Delete a user                         |
+| `/users/:username/favorites/:movie_id`       | POST   | Add a movie to favorites              |
+| `/users/:username/favorites/:movie_id`       | DELETE | Remove a movie from favorites         |
+
+--

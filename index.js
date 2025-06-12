@@ -15,8 +15,10 @@ const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
 
+const CONNECTION_URI = process.env.CONNECTION_URI
+
 mongoose
-  .connect(process.env.CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology:true})
+  .connect(CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology:true})
   .then(() => console.log("Connected to the MongoDB Database."))
   .catch((err) => console.error("Connection Error", err));
 
@@ -31,7 +33,8 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 const cors = require("cors");
-let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
+let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "https://ghibliheroku-f28bf5d9329a.herokuapp.com"];
+
 app.use(
   cors({
     origin: (origin, callback) => {
@@ -494,13 +497,17 @@ let genres = [
  Email: String,
  Birthday: Date (yyyy-dd-mm)
 }*/
-app.post("/users",
+app.post(
+  "/users",
+  //Validation logic here for request
   [
-    check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username is too short').isLength({min: 5}),
     check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail(),
-  ], async (req, res) => {
+  ], 
+  async (req, res) => {
+    //Checking for errors
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array()});
@@ -539,7 +546,13 @@ app.post("/users",
 });
 
 //GET ALL USERS
-app.get("/users", async (req, res) => {
+app.get(
+  "/users", 
+  passport.authenticate("jwt", {session: false}),
+  async (req, res) => {
+    if (req.user.username !== req.params.username) {
+      return res.status(400).send("You don't have permission for this");
+    }
   await Users.find()
     .then((users) => {
       res.status(201).json(users);
@@ -551,7 +564,13 @@ app.get("/users", async (req, res) => {
 });
 
 //GET A USER BY USERNAME
-app.get("/users/:Username", async (req, res) => {
+app.get(
+  "/users/:Username",
+  passport.authenticate("jwt", {session: false}),
+   async (req, res) => {
+    if (req.user.username !== req.params.username) {
+      return res.status(400).send("You do not have permission for this.");
+    }
   await Users.findOne({ Username: req.params.Username })
     .then((user) => {
       res.json(user);
@@ -568,16 +587,18 @@ app.put(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     // CONDITION TO CHECK ADDED HERE
-    if (req.user.Username !== req.params.Username) {
+    if (req.user.username !== req.params.username) {
       return res.status(400).send("Permission denied");
     }
+    let hashedPassword = User.hashPassword(req.body.password);
     // CONDITION ENDS
     await Users.findOneAndUpdate(
-      { Username: req.params.Username },
+      { username: req.params.username },
       {
         $set: {
+          Name: req.body.Name,
           Username: req.body.Username,
-          Password: req.body.Password,
+          Password: hashedPassword,
           Email: req.body.Email,
           Birthday: req.body.Birthday,
         },
@@ -595,11 +616,17 @@ app.put(
 );
 
 //ADD FAVORITE MOVIE
-app.post("/users/:Username/movies/:movieID", async (req, res) => {
+app.post(
+  "/users/:Username/movies/:movieID",
+  passport.authenticate("jwt", {session:false}),
+  async (req, res) => {
+    if (req.user.username !== req.params.username) {
+      return res.status(400).send("You don't have permission for this.")
+    }
   await Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
-      $push: { FavoriteMovies: req.params.MovieID },
+      $push: { favoriteMovies: req.params.MovieID },
     },
     { new: true }
   ) //This line makes sure that the updated document is returned
@@ -613,11 +640,17 @@ app.post("/users/:Username/movies/:movieID", async (req, res) => {
 });
 
 //REMOVE FAVORITE MOVIE
-app.delete("/users/:Username/:movieID", async (req, res) => {
+app.delete(
+  "/users/:Username/:movieID",
+  passport.authenticate("jwt", {session: false}),
+  async (req, res) => {
+    if (req.user.username !== req.params.username) {
+      return res.status(400).send("You don't have permission for this.");
+    }
   await Users.findOneAndUpdate(
     { Username: req.params.Username },
     {
-      $pull: { FavoriteMovies: req.params.MovieID },
+      $pull: { favoriteMovies: req.params.MovieID },
     },
     { new: true }
   ) //This line makes sure that the updated document is returned
@@ -631,7 +664,13 @@ app.delete("/users/:Username/:movieID", async (req, res) => {
 });
 
 //DELETE USER
-app.delete("/users/:Username", async (req, res) => {
+app.delete(
+  "/users/:Username",
+  passport.authenticate("jwt", {session: false}),
+   async (req, res) => {
+    if (req.user.username !== req.params.username) {
+      return res.status(400).send("You don't have permission for this.");
+    }
   await Users.findOneAndDelete({ Username: req.params.Username })
     .then((user) => {
       if (!user) {
@@ -651,7 +690,6 @@ app.delete("/users/:Username", async (req, res) => {
 //READ ALL MOVIES
 app.get(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     await Movies.find()
       .then((ghibliMovies) => {
@@ -665,43 +703,44 @@ app.get(
 );
 
 //READ MOVIE BY TITLE
-app.get("/movies/:title", (req, res) => {
-  const { title } = req.params;
-  const movie = ghibliMovies.find((movie) => movie.Title === title);
-
-  if (movie) {
-    res.status(200).json(movie);
-  } else {
-    res.status(400).send("Sorry, couldn't find that movie!");
-  }
+app.get(
+  "/movies/:title", 
+  passport.authenticate("jwt",{session:false}),
+  async (req, res) => {
+  await Movie.findOne({title: req.params.title})
+  .then((ghibliMovies) => {
+    res.status(200).json(ghibliMovies);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 //READ GENRE BY NAME
-app.get("/movies/genres/:genreName", (req, res) => {
-  const { genreName } = req.params;
-  const genre = ghibliMovies.find(
-    (movie) => movie.Genre.Name === genreName
-  ).Genre;
-
-  if (genre) {
-    res.status(200).json(genre);
-  } else {
-    res.status(400).send("Sorry, couldn't find that genre!");
-  }
-});
+app.get("/movies/genres/:genreName", 
+  passport.authenticate("jwt", {session:false}),
+  async (req, res) => {
+    await Movie.find({"genre.name": req.params.genreName})
+    .then((ghibliMovies) => {
+      res.status(200).json(ghibliMovies);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " +err);
+    });
+  });
 
 //READ DIRECTOR BY NAME
-app.get("/movies/directors/:directorName", (req, res) => {
-  const { directorName } = req.params;
-  const director = ghibliMovies.find(
-    (movie) => movie.Director.Name === directorName
-  ).Director;
-
-  if (director) {
-    res.status(200).json(director);
-  } else {
-    res.status(400).send("Sorry, couldn't find that one!");
-  }
+app.get(
+  "/movies/directors/:directorName", 
+passport.authenticate("jwt", {session:false}),
+async (req, res) => {
+  await Models.Movie.find({"director.name": req.params.directorName})
+  .then((ghibliMovies) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
 });
 
 //ERROR 500 MESSAGE
