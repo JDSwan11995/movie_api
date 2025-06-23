@@ -6,6 +6,7 @@ const
   bodyParser = require("body-parser"),
   uuid = require("uuid"),
   cors = require("cors"),
+  passport = require("passport"),
   app = express(),
   accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
     flags: "a",
@@ -35,10 +36,10 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static("public"));
 
-//const cors = require("cors");
+
 //let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "https://ghibliheroku-f28bf5d9329a.herokuapp.com"];
 
-/*app.use(
+app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
@@ -51,12 +52,12 @@ app.use(express.static("public"));
       return callback(null, true);
     },
   })
-)*/
+)
 
-/*const passport = require("passport");
+
 require("./passport");
 
-let auth = require("./auth")(app);*/
+let auth = require("./auth")(app);
 
 const {check, validationResult} = require('express-validator');
 
