@@ -4,8 +4,11 @@ const passport = require("passport"),
   passportJWT = require("passport-jwt");
 
 let Users = Models.User;
-(JWTStrategy = passportJWT.Strategy), (ExtractJWT = passportJWT.ExtractJwt);
+(JWTStrategy = passportJWT.Strategy), 
+(ExtractJWT = passportJWT.ExtractJwt);
 
+console.log("Loading passport config...");
+try{
 passport.use(
   new LocalStrategy(
     {
@@ -58,3 +61,7 @@ passport.use(
     }
   )
 );
+console.log("Passport strategies set successfully.");
+} catch (err) {
+    console.error("Error setting up passport strategies:", err);
+}
