@@ -18,7 +18,7 @@ let movieSchema = new mongoose.Schema({
     ImagePath: String,
     Featured: Boolean,
     Actors: [String],
-});
+}, {collection: "movies"});
 
 let userSchema = new mongoose.Schema({
     Name: {type: String, required: true},
@@ -27,7 +27,7 @@ let userSchema = new mongoose.Schema({
     Email: {type: String, required: true},
     Birthday: Date,
     FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie'}]
-});
+}, {collection: "users"});
 
 userSchema.statics.hashPassword = (password) => {
     return bcrypt.hashSync(password, 10);
