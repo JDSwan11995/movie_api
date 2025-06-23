@@ -705,6 +705,7 @@ app.get(
   async (req, res) => {
     try {
       const ghibliMovies = await Movies.find();
+      console.log("[MOVIES] Found: ", ghibliMovies.length, "movies")
         res.status(200).json(ghibliMovies);
       } catch(err) {
         console.error(err);
