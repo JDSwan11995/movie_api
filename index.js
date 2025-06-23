@@ -1,10 +1,12 @@
-const express = require("express"),
+const 
+  express = require("express"),
   morgan = require("morgan"),
   fs = require("fs"),
   path = require("path"),
   bodyParser = require("body-parser"),
   uuid = require("uuid"),
   app = express(),
+  cors = require("cors"),
   accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
     flags: "a",
   });
