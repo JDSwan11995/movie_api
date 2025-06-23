@@ -700,15 +700,15 @@ app.delete(
 //READ ALL MOVIES
 app.get(
   "/movies",
+  passport.authenticate('jwt', {session: false}),
   async (req, res) => {
-    await Movies.find()
-      .then((ghibliMovies) => {
-        res.status(201).json(ghibliMovies);
-      })
-      .catch((error) => {
-        console.error(error);
-        res.status(500).send("Error: " + error);
-      });
+    try {
+      const ghibliMovies = await Movies.find();
+        res.status(200).json(ghibliMovies);
+      } catch(err) {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      };
   }
 );
 
