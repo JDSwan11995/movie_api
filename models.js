@@ -43,8 +43,8 @@ userSchema.methods.toJSON = function() {
     return obj;
 };
 
-let Movie = mongoose.model('Movie', movieSchema);
-let User = mongoose.model('User', userSchema);
+let Movie = mongoose.model('Movie', movieSchema, 'movies');
+let User = mongoose.model('User', userSchema, 'users');
 
 module.exports.Movie = Movie;
 module.exports.User = User;
