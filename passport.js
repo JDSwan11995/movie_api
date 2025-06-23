@@ -8,7 +8,7 @@ let Users = Models.User;
 (ExtractJWT = passportJWT.ExtractJwt);
 
 console.log("Loading passport config...");
-try{
+
 passport.use(
   new LocalStrategy(
     {
@@ -61,7 +61,3 @@ passport.use(
     }
   )
 );
-console.log("Passport strategies set successfully.");
-} catch (err) {
-    console.error("Error setting up passport strategies:", err);
-}
