@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken'),
 
 require('./passport');
 
+
+console.log("Auth routes loaded");
+
 let generateJWTToken = (user) => {
     return jwt.sign(user, jwtSecret, {
         subject: user.Username,
