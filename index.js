@@ -33,7 +33,7 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 const cors = require("cors");
-let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "https://ghibliheroku-f28bf5d9329a.herokuapp.com"];
+//let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "https://ghibliheroku-f28bf5d9329a.herokuapp.com"];
 
 app.use(
   cors({
@@ -48,12 +48,12 @@ app.use(
       return callback(null, true);
     },
   })
-);
-
-let auth = require("./auth")(app);
+)
 
 const passport = require("passport");
 require("./passport");
+
+let auth = require("./auth")(app);
 
 const {check, validationResult} = require('express-validator');
 
