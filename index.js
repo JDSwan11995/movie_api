@@ -52,10 +52,10 @@ app.use(express.static("public"));
   })
 )*/
 
-const passport = require("passport");
+/*const passport = require("passport");
 require("./passport");
 
-let auth = require("./auth")(app);
+let auth = require("./auth")(app);*/
 
 const {check, validationResult} = require('express-validator');
 
