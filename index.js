@@ -5,6 +5,7 @@ const
   path = require("path"),
   bodyParser = require("body-parser"),
   uuid = require("uuid"),
+  cors = require("cors"),
   app = express(),
   accessLogStream = fs.createWriteStream(path.join(__dirname, "log.txt"), {
     flags: "a",
