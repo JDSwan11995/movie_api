@@ -18,7 +18,7 @@ passport.use(
     async (username, password, callback) => {
         console.log('[PASSPORT] LocalStrategy started:', {username});
       try {
-        const user = Users.findOne({ Username: username });
+        const user = await Users.findOne({ Username: username });
         if (!user) {
           console.warn("[PASSPORT] No user with the username: ",username);
           return callback(null, false, {
