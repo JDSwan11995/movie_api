@@ -5,7 +5,6 @@ const jwt = require('jsonwebtoken'),
 
 require('./passport');
 
-
 console.log("Auth routes loaded");
 
 let generateJWTToken = (user) => {
@@ -38,6 +37,7 @@ module.exports = (router) => {
                     return res.status(500).send("Login error");
                 }
                 let token = generateJWTToken(user.toJSON());
+                console.log("[AUTH] Token issued for: ", user.Username);
                 console.log("[LOGIN] JWT Token Generated");
                 return res.json({user, token});
             });
