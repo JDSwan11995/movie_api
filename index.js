@@ -30,12 +30,13 @@ db.once("open", () => {
 
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(bodyParser.json());
+app.use(cors());
 app.use(express.static("public"));
 
-const cors = require("cors");
+//const cors = require("cors");
 //let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "https://ghibliheroku-f28bf5d9329a.herokuapp.com"];
 
-app.use(
+/*app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
@@ -48,7 +49,7 @@ app.use(
       return callback(null, true);
     },
   })
-)
+)*/
 
 const passport = require("passport");
 require("./passport");
