@@ -550,7 +550,7 @@ app.get(
   "/users", 
   passport.authenticate("jwt", {session: false}),
   async (req, res) => {
-    if (req.user.username !== req.params.username) {
+    if (req.user.Username !== req.params.Username) {
       return res.status(400).send("You don't have permission for this");
     }
   await Users.find()
@@ -568,7 +568,7 @@ app.get(
   "/users/:Username",
   passport.authenticate("jwt", {session: false}),
    async (req, res) => {
-    if (req.user.username !== req.params.username) {
+    if (req.user.Username !== req.params.Username) {
       return res.status(400).send("You do not have permission for this.");
     }
   await Users.findOne({ Username: req.params.Username })
@@ -587,13 +587,13 @@ app.put(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     // CONDITION TO CHECK ADDED HERE
-    if (req.user.username !== req.params.username) {
+    if (req.user.Username !== req.params.Username) {
       return res.status(400).send("Permission denied");
     }
-    let hashedPassword = User.hashPassword(req.body.password);
+    let hashedPassword = User.hashPassword(req.body.Password);
     // CONDITION ENDS
     await Users.findOneAndUpdate(
-      { username: req.params.username },
+      { Username: req.params.Username },
       {
         $set: {
           Name: req.body.Name,
@@ -617,10 +617,10 @@ app.put(
 
 //ADD FAVORITE MOVIE
 app.post(
-  "/users/:Username/movies/:movieID",
+  "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", {session:false}),
   async (req, res) => {
-    if (req.user.username !== req.params.username) {
+    if (req.user.Username !== req.params.Username) {
       return res.status(400).send("You don't have permission for this.")
     }
   await Users.findOneAndUpdate(
@@ -641,10 +641,10 @@ app.post(
 
 //REMOVE FAVORITE MOVIE
 app.delete(
-  "/users/:Username/:movieID",
+  "/users/:Username/:MovieID",
   passport.authenticate("jwt", {session: false}),
   async (req, res) => {
-    if (req.user.username !== req.params.username) {
+    if (req.user.Username !== req.params.Username) {
       return res.status(400).send("You don't have permission for this.");
     }
   await Users.findOneAndUpdate(
@@ -668,7 +668,7 @@ app.delete(
   "/users/:Username",
   passport.authenticate("jwt", {session: false}),
    async (req, res) => {
-    if (req.user.username !== req.params.username) {
+    if (req.user.Username !== req.params.Username) {
       return res.status(400).send("You don't have permission for this.");
     }
   await Users.findOneAndDelete({ Username: req.params.Username })
