@@ -19,7 +19,7 @@ const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
 
-console.log('[DEBUG] Movie model is using collection: ', Movie.collection.name)
+console.log('[DEBUG] Movie model is using collection: ', Movies.collection.name)
 
 const CONNECTION_URI = process.env.CONNECTION_URI
 
