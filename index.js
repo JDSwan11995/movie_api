@@ -28,6 +28,10 @@ mongoose
   .then(() => console.log("Connected to the MongoDB Database."))
   .catch((err) => console.error("Connection Error", err));
 
+mongoose.connection.on('connected', () => {
+  console.log('[DEBUG] Connected to MongoDB Database: ', mongoose.connection.name);
+});
+
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
 db.once("open", () => {
