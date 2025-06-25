@@ -1,5 +1,4 @@
-const 
-  express = require("express"),
+const express = require("express"),
   morgan = require("morgan"),
   fs = require("fs"),
   path = require("path"),
@@ -19,17 +18,23 @@ const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
 
-console.log('[DEBUG] Movie model is using collection: ', Movies.collection.name)
+console.log(
+  "[DEBUG] Movie model is using collection: ",
+  Movies.collection.name
+);
 
-const CONNECTION_URI = process.env.CONNECTION_URI
+const CONNECTION_URI = process.env.CONNECTION_URI;
 
 mongoose
-  .connect(CONNECTION_URI, {useNewUrlParser: true, useUnifiedTopology:true})
+  .connect(CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to the MongoDB Database."))
   .catch((err) => console.error("Connection Error", err));
 
-mongoose.connection.on('connected', () => {
-  console.log('[DEBUG] Connected to MongoDB Database: ', mongoose.connection.name);
+mongoose.connection.on("connected", () => {
+  console.log(
+    "[DEBUG] Connected to MongoDB Database: ",
+    mongoose.connection.name
+  );
 });
 
 const db = mongoose.connection;
@@ -42,7 +47,6 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static("public"));
-
 
 //let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "https://ghibliheroku-f28bf5d9329a.herokuapp.com"];
 
@@ -59,14 +63,13 @@ app.use(
       return callback(null, true);
     },
   })
-)
-
+);
 
 require("./passport");
 
 let auth = require("./auth")(app);
 
-const {check, validationResult} = require('express-validator');
+const { check, validationResult } = require("express-validator");
 
 //ENTRY PAGE
 app.get("/", (req, res) => {
@@ -145,21 +148,28 @@ let users = [
     Email: "dualmagic@clacksmail.gnu",
   }, //Eskarina Smith
   {
-    _id:"68488126e38af59e02fc274c",
+    _id: "68488126e38af59e02fc274c",
     Name: "Adora Belle Dearheart",
     Username: "A.B.Dearheart",
     Birthday: "1982-11-05",
     Password: "Moist-Is-An-Idiot",
     Email: "GolumTrustAdmin@clacksmail.gnu",
-  },//Adora Belle Dearheart
+  }, //Adora Belle Dearheart
   {
-    _id:"6848843b7936719cdcfec33d",
-    Name:"Moist Von Lipwig",
-    Username:"Golden_Suit",
+    _id: "6848843b7936719cdcfec33d",
+    Name: "Moist Von Lipwig",
+    Username: "Golden_Suit",
     Password: "Trust-Me!",
     Birthday: "1980-06-15",
     Email: "MoistVonLipwig@clacksmail.gnu",
-  },//Moist Von Lipwig
+  }, //Moist Von Lipwig
+  {
+    Name: "Nobby Nobbs",
+    Username: "CplNobbs",
+    Password: "HumanHonestly",
+    Email: "C.W.St.J.Nobbs@cw.clacksmail.gnu",
+    Birthday: "1964-02-29",
+  },//Nobby Nobbs
 ];
 let directors = [
   {
@@ -512,91 +522,97 @@ app.post(
   "/users",
   //Validation logic here for request
   [
-    check('Username', 'Username is too short').isLength({min: 5}),
-    check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
-    check('Password', 'Password is required').not().isEmpty(),
-    check('Email', 'Email does not appear to be valid').isEmail(),
-  ], 
+    check("Username", "Username is too short").isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non-alphanumeric characters - not allowed."
+    ).isAlphanumeric(),
+    check("Password", "Password is required").not().isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail(),
+  ],
   async (req, res) => {
     //Checking for errors
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array()});
+      return res.status(422).json({ errors: errors.array() });
     }
-  let hashedPassword = Users.hashPassword(req.body.Password);
-  Users.findOne({ Username: req.body.Username })
-    .then((user) => {
-      if (user) {
-        return res
-          .status(404)
-          .send(
-            req.body.Username +
-              " Hey, there's someone that has that Username, please try something else."
-          );
-      } else {
-        Users.create({
-          Name: req.body.Name,
-          Username: req.body.Username,
-          Password: hashedPassword,
-          Email: req.body.Email,
-          Birthday: req.body.Birthday,
-        })
-          .then((user) => {
-            res.status(201).json({
-              _id:user._id,
-              Name:user.Name,
-              Username:user.Username,
-              Email:user.Email,
-              Birthday: user.Birthday
-            });
+    let hashedPassword = Users.hashPassword(req.body.Password);
+    Users.findOne({ Username: req.body.Username })
+      .then((user) => {
+        if (user) {
+          return res
+            .status(404)
+            .send(
+              req.body.Username +
+                " Hey, there's someone that has that Username, please try something else."
+            );
+        } else {
+          Users.create({
+            Name: req.body.Name,
+            Username: req.body.Username,
+            Password: hashedPassword,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday,
           })
-          .catch((error) => {
-            console.error(error);
-            res.status(500).send("Error: " + error);
-          });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("Error: " + error);
-    });
-});
+            .then((user) => {
+              res.status(201).json({
+                _id: user._id,
+                Name: user.Name,
+                Username: user.Username,
+                Email: user.Email,
+                Birthday: user.Birthday,
+              });
+            })
+            .catch((error) => {
+              console.error(error);
+              res.status(500).send("Error: " + error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      });
+  }
+);
 
 //GET ALL USERS
 app.get(
-  "/users", 
-  passport.authenticate("jwt", {session: false}),
+  "/users",
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     if (req.user.Username !== req.params.Username) {
       return res.status(400).send("You don't have permission for this");
     }
-  await Users.find()
-    .then((users) => {
-      res.status(201).json(users);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+    await Users.find()
+      .then((users) => {
+        res.status(201).json(users);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //GET A USER BY USERNAME
 app.get(
   "/users/:Username",
-  passport.authenticate("jwt", {session: false}),
-   async (req, res) => {
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
     if (req.user.Username !== req.params.Username) {
       return res.status(400).send("You do not have permission for this.");
     }
-  await Users.findOne({ Username: req.params.Username })
-    .then((user) => {
-      res.json(user);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+    await Users.findOne({ Username: req.params.Username })
+      .then((user) => {
+        res.json(user);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //UPDATE USER
 app.put(
@@ -635,131 +651,139 @@ app.put(
 //ADD FAVORITE MOVIE
 app.post(
   "/users/:Username/movies/:MovieID",
-  passport.authenticate("jwt", {session:false}),
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     if (req.user.Username !== req.params.Username) {
-      return res.status(400).send("You don't have permission for this.")
+      return res.status(400).send("You don't have permission for this.");
     }
-  await Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    {
-      $push: { favoriteMovies: req.params.MovieID },
-    },
-    { new: true }
-  ) //This line makes sure that the updated document is returned
-    .then((updatedUser) => {
-      res.json(updatedUser);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+    await Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $push: { favoriteMovies: req.params.MovieID },
+      },
+      { new: true }
+    ) //This line makes sure that the updated document is returned
+      .then((updatedUser) => {
+        res.json(updatedUser);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //REMOVE FAVORITE MOVIE
 app.delete(
   "/users/:Username/:MovieID",
-  passport.authenticate("jwt", {session: false}),
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     if (req.user.Username !== req.params.Username) {
       return res.status(400).send("You don't have permission for this.");
     }
-  await Users.findOneAndUpdate(
-    { Username: req.params.Username },
-    {
-      $pull: { favoriteMovies: req.params.MovieID },
-    },
-    { new: true }
-  ) //This line makes sure that the updated document is returned
-    .then((updatedUser) => {
-      res.json(updatedUser);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+    await Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $pull: { favoriteMovies: req.params.MovieID },
+      },
+      { new: true }
+    ) //This line makes sure that the updated document is returned
+      .then((updatedUser) => {
+        res.json(updatedUser);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //DELETE USER
 app.delete(
   "/users/:Username",
-  passport.authenticate("jwt", {session: false}),
-   async (req, res) => {
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
     if (req.user.Username !== req.params.Username) {
       return res.status(400).send("You don't have permission for this.");
     }
-  await Users.findOneAndDelete({ Username: req.params.Username })
-    .then((user) => {
-      if (!user) {
-        res
-          .status(400)
-          .send("That user, " + req.params.Username + " was not found");
-      } else {
-        res.status(200).send(req.params.Username + " was deleted");
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+    await Users.findOneAndDelete({ Username: req.params.Username })
+      .then((user) => {
+        if (!user) {
+          res
+            .status(400)
+            .send("That user, " + req.params.Username + " was not found");
+        } else {
+          res.status(200).send(req.params.Username + " was deleted");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //READ ALL MOVIES
 app.get(
   "/movies",
-  passport.authenticate('jwt', {session: false}),
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
       const ghibliMovies = await Movies.find();
-      console.log("[MOVIES] Found: ", ghibliMovies.length, "movies")
-        res.status(200).json(ghibliMovies);
-      } catch(err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      };
+      console.log("[MOVIES] Found: ", ghibliMovies.length, "movies");
+      res.status(200).json(ghibliMovies);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    }
   }
 );
 
 //READ MOVIE BY TITLE
 app.get(
-  "/movies/:title", 
-  passport.authenticate("jwt",{session:false}),
+  "/movies/:title",
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-  await Movie.findOne({title: req.params.title})
-  .then((ghibliMovies) => {
-    res.status(200).json(ghibliMovies);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send("Error: " + err);
-  });
-});
+    await Movie.findOne({ title: req.params.title })
+      .then((ghibliMovies) => {
+        res.status(200).json(ghibliMovies);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //READ GENRE BY NAME
-app.get("/movies/genres/:genreName", 
-  passport.authenticate("jwt", {session:false}),
+app.get(
+  "/movies/genres/:genreName",
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    await Movie.find({"genre.name": req.params.genreName})
-    .then((ghibliMovies) => {
-      res.status(200).json(ghibliMovies);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " +err);
-    });
-  });
+    await Movie.find({ "genre.name": req.params.genreName })
+      .then((ghibliMovies) => {
+        res.status(200).json(ghibliMovies);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //READ DIRECTOR BY NAME
 app.get(
-  "/movies/directors/:directorName", 
-passport.authenticate("jwt", {session:false}),
-async (req, res) => {
-  await Models.Movie.find({"director.name": req.params.directorName})
-  .then((ghibliMovies) => {
-    console.error(err);
-    res.status(500).send('Error: ' + err);
-  });
-});
+  "/movies/directors/:directorName",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    await Models.Movie.find({ "director.name": req.params.directorName }).then(
+      (ghibliMovies) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      }
+    );
+  }
+);
 
 //ERROR 500 MESSAGE
 app.use((err, req, res, next) => {
@@ -773,7 +797,6 @@ app.use((err, req, res, next) => {
 
 //PORT OF CALL
 const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0', () => {
+app.listen(port, "0.0.0.0", () => {
   console.log("Your app is listening on port " + port);
 });
-

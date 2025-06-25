@@ -70,6 +70,13 @@
     "Password": "Trust-Me!",
     "Email": "MoistVonLipwig@clacksmail.gnu",
     "Birthday": "1980-06-15"
+  },
+  {
+    "_id": "685c75d13b952242fd8f7f14",
+    "Name": "Nobby Nobbs",
+    "Username": "CplNobbs",
+    "Password": "HumanHonestly",
+    "Email": "C.W.St.J.Nobbs@cw.clacksmail.gnu",
+    "Birthday": "1964-02-29"
   }
 ]
-
