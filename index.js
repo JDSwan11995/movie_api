@@ -339,14 +339,13 @@ app.get(
   "/movies/genres/:genreName",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    await Movies.find({ "genre.Name": req.params.genreName })
-      .then((ghibliMovies) => {
+    try {
+    const ghibliMovies = await Movies.find({ "Genre.Name": req.params.genreName });
         res.status(200).json(ghibliMovies);
-      })
-      .catch((err) => {
+      } catch(err) {
         console.error(err);
         res.status(500).send("Error: " + err);
-      });
+      };
   }
 );
 
