@@ -233,12 +233,12 @@ app.post(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     if (req.user.Username !== req.params.Username) {
-      return res.status(400).send("You don't have permission for this.");
+      return res.status(403).send("You don't have permission for this.");
     }
     await Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
-        $push: { favoriteMovies: req.params.MovieID },
+        $push: { FavoriteMovies: new mongoose.Types.ObjectId(req.params.MovieID) },
       },
       { new: true }
     ) //This line makes sure that the updated document is returned
@@ -254,16 +254,16 @@ app.post(
 
 //REMOVE FAVORITE MOVIE
 app.delete(
-  "/users/:Username/:MovieID",
+  "/users/:Username/movies/:MovieID",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     if (req.user.Username !== req.params.Username) {
-      return res.status(400).send("You don't have permission for this.");
+      return res.status(403).send("You don't have permission for this.");
     }
     await Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
-        $pull: { favoriteMovies: req.params.MovieID },
+        $pull: { FavoriteMovies: new mongoose.Types.ObjectId(req.params.MovieID) },
       },
       { new: true }
     ) //This line makes sure that the updated document is returned
