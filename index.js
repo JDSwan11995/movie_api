@@ -339,7 +339,7 @@ app.get(
   "/movies/genres/:genreName",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    await Movies.find({ "genre.name": req.params.genreName })
+    await Movies.find({ "genre.Name": req.params.genreName })
       .then((ghibliMovies) => {
         res.status(200).json(ghibliMovies);
       })
