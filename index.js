@@ -355,7 +355,7 @@ app.get(
   "/movies/directors/:directorName",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    await Movies.find({ "director.Name": req.params.directorName })
+    await Movies.find({ "Director.Name": req.params.directorName })
   .then((ghibliMovies) => {
     res.status(200).json(ghibliMovies);
   })
