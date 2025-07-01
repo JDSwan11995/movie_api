@@ -237,9 +237,7 @@ app.post(
     }
     await Users.findOneAndUpdate(
       { Username: req.params.Username },
-      {
-        $push: { FavoriteMovies: new mongoose.Types.ObjectId(req.params.MovieID) },
-      },
+      { $push: { FavoriteMovies: new mongoose.Types.ObjectId(req.params.MovieID) }, },
       { new: true }
     ) //This line makes sure that the updated document is returned
       .then((updatedUser) => {
@@ -262,9 +260,7 @@ app.delete(
     }
     await Users.findOneAndUpdate(
       { Username: req.params.Username },
-      {
-        $pull: { FavoriteMovies: new mongoose.Types.ObjectId(req.params.MovieID) },
-      },
+      { $pull: { FavoriteMovies: new mongoose.Types.ObjectId(req.params.MovieID) }, },
       { new: true }
     ) //This line makes sure that the updated document is returned
       .then((updatedUser) => {
