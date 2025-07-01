@@ -323,7 +323,7 @@ app.get(
   "/movies/:title",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
-    await Movies.findOne({ Title: req.params.title })
+    await Movies.findOne({ itle: req.params.title })
       .then((ghibliMovies) => {
         res.status(200).json(ghibliMovies);
       })
