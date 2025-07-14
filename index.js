@@ -237,7 +237,11 @@ app.post(
     }
     await Users.findOneAndUpdate(
       { Username: req.params.Username },
-      { $push: { FavoriteMovies: new mongoose.Types.ObjectId(req.params.MovieID) }, },
+      {
+        $push: {
+          FavoriteMovies: new mongoose.Types.ObjectId(req.params.MovieID),
+        },
+      },
       { new: true }
     ) //This line makes sure that the updated document is returned
       .then((updatedUser) => {
@@ -260,7 +264,11 @@ app.delete(
     }
     await Users.findOneAndUpdate(
       { Username: req.params.Username },
-      { $pull: { FavoriteMovies: new mongoose.Types.ObjectId(req.params.MovieID) }, },
+      {
+        $pull: {
+          FavoriteMovies: new mongoose.Types.ObjectId(req.params.MovieID),
+        },
+      },
       { new: true }
     ) //This line makes sure that the updated document is returned
       .then((updatedUser) => {
@@ -299,20 +307,16 @@ app.delete(
 );
 
 //READ ALL MOVIES
-app.get(
-  "/movies",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    try {
-      const ghibliMovies = await Movies.find();
-      console.log("[MOVIES] Found: ", ghibliMovies.length, "movies");
-      res.status(200).json(ghibliMovies);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    }
+app.get("/movies", async (req, res) => {
+  try {
+    const ghibliMovies = await Movies.find();
+    console.log("[MOVIES] Found: ", ghibliMovies.length, "movies");
+    res.status(200).json(ghibliMovies);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
   }
-);
+});
 
 //READ MOVIE BY TITLE
 app.get(
@@ -336,12 +340,14 @@ app.get(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     try {
-    const ghibliMovies = await Movies.find({ "Genre.Name": req.params.genreName });
-        res.status(200).json(ghibliMovies);
-      } catch(err) {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      };
+      const ghibliMovies = await Movies.find({
+        "Genre.Name": req.params.genreName,
+      });
+      res.status(200).json(ghibliMovies);
+    } catch (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    }
   }
 );
 
@@ -351,13 +357,13 @@ app.get(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     await Movies.find({ "Director.Name": req.params.directorName })
-  .then((ghibliMovies) => {
-    res.status(200).json(ghibliMovies);
-  })
-  .catch((err) => {
-    console.error(err);
-    res.status(500).send("Error: " + err);
-  });
+      .then((ghibliMovies) => {
+        res.status(200).json(ghibliMovies);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
   }
 );
 
