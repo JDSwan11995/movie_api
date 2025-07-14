@@ -48,7 +48,12 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static("public"));
 
-//let allowedOrigins = ["http://localhost:8080", "http://testsite.com", "https://ghibliheroku-f28bf5d9329a.herokuapp.com"];
+let allowedOrigins = [
+  "http://localhost:8080",
+  "http://testsite.com",
+  "https://ghibliheroku-f28bf5d9329a.herokuapp.com",
+  "http://localhost:1234",
+];
 
 app.use(
   cors({
