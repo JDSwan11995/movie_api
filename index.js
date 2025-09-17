@@ -53,6 +53,7 @@ let allowedOrigins = [
   "http://testsite.com",
   "https://ghibliheroku-f28bf5d9329a.herokuapp.com",
   "http://localhost:1234",
+  "https://charming-croquembouche-20b4dc.netlify.app/",
 ];
 
 app.use(
